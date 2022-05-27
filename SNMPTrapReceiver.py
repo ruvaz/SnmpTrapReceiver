@@ -24,7 +24,13 @@ print("Agent is listening SNMP Trap on " +
 config.addTransport(
     snmpEngine,
     udp.domainName + (1,),
-    udp.UdpTransport().openServerMode((TrapAgentAddress, Port))
+    udp.UdpTransport().openServerMode((TrapAgentAddress, Port)),
+    ObjectType(ObjectIdentity(
+        'IF-MIB', 'ifInOctets', 1
+    ).addAsn1MibSource(
+        'file://.'
+    )
+    )
 )
 
 # Configure community here
