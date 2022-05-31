@@ -14,7 +14,6 @@ logging.basicConfig(filename='received_traps.log', filemode='w',
 
 logging.info("Agent is listening SNMP Trap on " +
              TrapAgentAddress+" , Port : " + str(Port))
-
 logging.info(
     '--------------------------------------------------------------------------')
 
@@ -24,13 +23,7 @@ print("Agent is listening SNMP Trap on " +
 config.addTransport(
     snmpEngine,
     udp.domainName + (1,),
-    udp.UdpTransport().openServerMode((TrapAgentAddress, Port)),
-    ObjectType(ObjectIdentity(
-        'IF-MIB', 'ifInOctets', 1
-    ).addAsn1MibSource(
-        'file://.'
-    )
-    )
+    udp.UdpTransport().openServerMode((TrapAgentAddress, Port))
 )
 
 # Configure community here
