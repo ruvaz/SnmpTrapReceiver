@@ -1,0 +1,874 @@
+--
+-- ***************************************************************************
+--
+--
+-- Document Title:    SPECIFICATION,MIB,DCII COMMERCIAL IRD,NIOBE
+-- Version:           1.2
+-- Date:              October 29, 2019
+--
+--
+-- Copyright (c) 2019 ARRIS Group, Inc.  All rights reserved.
+--
+--
+-- ************************ PROPRIETARY INFORMATION *************************
+--
+-- This document is the property of ARRIS Group, Inc.  This document may only be distributed to:
+-- (i) an ARRIS employee having a legitimate business need for the information contained herein,
+-- or (ii) a non-ARRIS party having a legitimate business need for the information contained herein.
+-- No license, expressed or implied, under any patent, copyright or trade secret right is granted or
+-- implied by the conveyance of this document. No part of this document may be reproduced, transmitted,
+-- transcribed, stored in a retrieval system, translated into any language or computer language,
+-- in any form or by any means, electronic, mechanical, magnetic, optical, chemical, manual, or
+-- otherwise without the prior written permission of ARRIS Group, Inc.
+-- (See Document Security Standard, 320190-000 for details.)
+--
+-- The ARRIS Logo and all other trademarks indicated as such herein are trademarks of ARRIS Group, Inc.
+-- All other product or service names are the property of their respective owners.
+--
+--
+
+NIOBE-MIB      DEFINITIONS ::= BEGIN
+
+    IMPORTS
+
+        MODULE-IDENTITY, OBJECT-TYPE, IpAddress, TimeTicks, NOTIFICATION-TYPE
+        FROM SNMPv2-SMI
+
+        DisplayString FROM SNMPv2-TC
+        ;
+
+        dsr            MODULE-IDENTITY
+        LAST-UPDATED   "201910292000Z"     -- 29 October, 2019 at 20:00 GMT
+        ORGANIZATION   "ARRIS Group Inc"
+        CONTACT-INFO   "ARRIS Technical Response Center
+                       Inside USA     1-888-944-HELP (1-888-044-4357)
+                       Outside USA    1-215-323-0044
+                       TRC Hours:
+                       Monday through Friday 8am - 7pm Eastern Standard Time
+                       Saturdays            10am - 5pm Eastern Standard Time"
+        DESCRIPTION    "The managed objects for the dsr mib."
+
+
+        REVISION    "201910292000Z"     -- 29 October, 2019 at 20:00 GMT
+        DESCRIPTION "DSR mib version 1.2: Revision of version 1.0 NIOBE MIB, Niobe.mib.
+        Adds acquisitionRecoveryActive object
+
+        ::=  {  giproducts  624  }
+
+    org           OBJECT IDENTIFIER
+        ::=  {  iso  3  }
+
+    dod           OBJECT IDENTIFIER
+        ::=  {  org  6  }
+
+    internet      OBJECT IDENTIFIER
+        ::=  {  dod  1  }
+
+    mgmt       OBJECT IDENTIFIER
+        ::=  {  internet  2  }
+   
+    mib-2      OBJECT IDENTIFIER 
+        ::=  {  mgmt      1  }
+        
+    system       OBJECT IDENTIFIER 
+        ::=  {  mib-2     1  }
+
+    private       OBJECT IDENTIFIER
+        ::=  {  internet  4  }
+
+    enterprises   OBJECT IDENTIFIER
+        ::=  {  private  1  }
+
+    giMIB         OBJECT IDENTIFIER
+        ::=  {  enterprises  1166  }
+
+    giproducts    OBJECT IDENTIFIER
+        ::=  {  giMIB  1  }   
+        
+        
+-- the System group
+-- Implementation of the System group is mandatory for all
+-- systems.  If an agent is not configured to have a value
+-- for any of these variables, a string of length 0 is
+-- returned.
+
+    sysDescr OBJECT-TYPE
+        SYNTAX        DisplayString
+        MAX-ACCESS    read-only
+        STATUS        current
+        DESCRIPTION
+            "A textual description of the entity.  This value
+             should include the system's model number. It is 
+             mandatory that this value only contain printable 
+             ASCII characters."
+        ::= { system 1 }
+
+    sysObjectID OBJECT-TYPE
+        SYNTAX        DisplayString
+        MAX-ACCESS    read-only
+        STATUS        current
+        DESCRIPTION
+            "The vendor's authoritative identification of the
+             network management subsystem contained in the
+             entity.  This value is allocated within the SMI
+             enterprises subtree (1.3.6.1.4.1) and provides an
+             easy and unambiguous means for determining `what
+             kind of box' is being managed.  For example, if
+             vendor `Flintstones, Inc.' was assigned the
+             subtree 1.3.6.1.4.1.4242, it could assign the
+             identifier 1.3.6.1.4.1.4242.1.1 to its `Fred
+             Router'."
+        ::= { system 2 }
+
+    sysUpTime OBJECT-TYPE
+        SYNTAX  TimeTicks
+        MAX-ACCESS  read-only
+        STATUS  current
+        DESCRIPTION
+            "The time (in hundredths of a second) since the
+             network management portion of the system was last
+             re-initialized."
+        ::= { system 3 }
+
+    sysContact OBJECT-TYPE
+        SYNTAX        OCTET STRING  ( SIZE ( 0 .. 255 ) )
+        MAX-ACCESS    read-write
+        STATUS        current
+        DESCRIPTION
+            "The textual identification of the contact person
+             for this managed node, together with information
+             on how to contact this person."
+        ::= { system 4 }
+
+    sysName OBJECT-TYPE
+        SYNTAX        OCTET STRING  ( SIZE ( 0 .. 255 ) )
+        MAX-ACCESS    read-write
+        STATUS        current
+        DESCRIPTION
+            "An administratively-assigned name for this
+             managed node."
+        ::= { system 5 }
+
+    sysLocation OBJECT-TYPE
+        SYNTAX        OCTET STRING  ( SIZE ( 0 .. 255 ) )
+        MAX-ACCESS    read-write
+        STATUS        current
+        DESCRIPTION
+            "The physical location of this node (e.g.,
+             'telephone closet, 3rd floor')."
+        ::= { system 6 }
+
+    sysServices OBJECT-TYPE
+        SYNTAX  INTEGER ( 0..127 )
+        MAX-ACCESS    read-only
+        STATUS        current
+        DESCRIPTION
+            "A value which indicates the set of services that
+             this entity primarily offers.
+
+             The value is a sum.  This sum initially takes the
+             value zero, Then, for each layer, L, in the range
+             1 through 7, that this node performs transactions
+             for, 2 raised to (L - 1) is added to the sum.  For
+             example, a node which performs primarily routing
+             functions would have a value of 4 (2^(3-1)).  In
+             contrast, a node which is a host offering
+             application services would have a value of 72
+             (2^(4-1) + 2^(7-1)).  Note that in the context of
+             the Internet suite of protocols, values should be
+             calculated accordingly:
+
+             layer  functionality
+             1  physical (e.g., repeaters)
+             2  datalink/subnetwork (e.g., bridges)
+             3  internet (e.g., IP gateways)
+             4  end-to-end  (e.g., IP hosts)
+             7  applications (e.g., mail relays)
+
+             For systems including OSI protocols, layers 5 and
+             6 may also be counted."
+         ::= { system 7 }
+
+
+-- the Identity group 
+--
+-- This group of objects provides information concerning the identity
+-- of IRD models that support this MIB.    
+--
+
+    identityMib     OBJECT IDENTIFIER
+        ::=  {  dsr  1  }
+
+    dsr7401     OBJECT IDENTIFIER
+        ::=  {  identityMib  1  }
+
+    dsr7403     OBJECT IDENTIFIER
+        ::=  {  identityMib  2  }
+
+    dsr7412     OBJECT IDENTIFIER
+        ::=  {  identityMib  3  }
+
+    dsr4450     OBJECT IDENTIFIER
+        ::=  {  identityMib  4  }
+
+    dsr4470     OBJECT IDENTIFIER
+        ::=  {  identityMib  5  }
+
+    dsr4530     OBJECT IDENTIFIER
+        ::=  {  identityMib  6  }
+
+    dsr7406     OBJECT IDENTIFIER
+        ::=  {  identityMib  7  }
+        
+    dsr7409     OBJECT IDENTIFIER
+        ::=  {  identityMib  8  }        
+
+    dsr4430MD   OBJECT IDENTIFIER
+        ::=  {  identityMib  9  }
+
+-- the Interfaces group 
+--
+-- This group of objects provides information concerning the unit's
+-- control and media network interfaces.    
+--
+
+    interfacesMib       OBJECT IDENTIFIER
+    --      Allows an SNMP manager to configure and read the status of the
+    --      data channels.
+        ::=  {  dsr  2  }
+
+    networkInterfaceTable OBJECT-TYPE
+        SYNTAX             SEQUENCE OF NetworkInterfaceEntry
+        MAX-ACCESS         not-accessible
+        STATUS             current
+        DESCRIPTION
+            "The table of network interfaces."
+        ::= { interfacesMib 1 }
+
+    networkInterfaceEntry OBJECT-TYPE
+        SYNTAX     NetworkInterfaceEntry
+        MAX-ACCESS  not-accessible
+        STATUS      current
+        DESCRIPTION
+            "The table of information relevant to this
+            network interface table."
+        INDEX      { networkInterfaceIndex}
+        ::= { networkInterfaceTable 1 }
+
+    NetworkInterfaceEntry ::= SEQUENCE {
+        networkInterfaceIndex        INTEGER,
+        networkInterfaceAddress      IpAddress,
+        networkInterfaceSubnetMask   IpAddress,
+        networkInterfaceGateway      IpAddress,
+        networkInterfaceMacAddress   OCTET STRING,
+        networkInterfaceName         OCTET STRING,
+        networkInterfaceStatus       INTEGER,
+        networkInterfaceRate         INTEGER
+    }
+
+    networkInterfaceIndex  OBJECT-TYPE
+        SYNTAX        INTEGER(1..5)
+        MAX-ACCESS    read-only
+        STATUS        current
+        DESCRIPTION
+            "The index for the table. This corresponds to the network
+            interface instance."
+        ::= { networkInterfaceEntry 1 }
+   
+    networkInterfaceAddress  OBJECT-TYPE
+        SYNTAX        IpAddress
+        MAX-ACCESS    read-write
+        STATUS        current
+        DESCRIPTION
+            "The IP address of the network interface, in the common
+            dotted-decimal format."
+        ::=  { networkInterfaceEntry 2 }
+
+    networkInterfaceSubnetMask  OBJECT-TYPE
+        SYNTAX        IpAddress
+        MAX-ACCESS    read-write
+        STATUS        current
+        DESCRIPTION
+            "The subnet mask of the network interface, in the dotted-decimal
+            format."
+        ::=  { networkInterfaceEntry 3 }
+
+    networkInterfaceGateway  OBJECT-TYPE
+        SYNTAX        IpAddress
+        MAX-ACCESS    read-write
+        STATUS        current
+        DESCRIPTION
+            "The IP address of the gateway that is used by the network
+            interface, in dotted-decimal format."
+        ::=  { networkInterfaceEntry 4 }
+
+    networkInterfaceMacAddress  OBJECT-TYPE
+        SYNTAX        OCTET STRING ( SIZE ( 17 ) )
+        MAX-ACCESS    read-only
+        STATUS        current
+        DESCRIPTION
+            "The gigEthernet MAC address in hh:hh:hh:hh:hh:hh
+            format."
+        ::=  { networkInterfaceEntry 5 }
+
+    networkInterfaceName  OBJECT-TYPE
+        SYNTAX        OCTET STRING
+        MAX-ACCESS    read-only
+        STATUS        current
+        DESCRIPTION
+            "The name of the network interface.  For example, Ethernet-1, 
+            Eth-2, Control, etc."
+        ::=  { networkInterfaceEntry 6 }
+
+    networkInterfaceStatus     OBJECT-TYPE
+        SYNTAX        INTEGER  { down ( 0 ) , up ( 1 )}
+        MAX-ACCESS    read-only
+        STATUS        current
+        DESCRIPTION
+            "Status of the network interface."
+        ::=  {  networkInterfaceEntry  7  }
+
+    networkInterfaceRate     OBJECT-TYPE
+        SYNTAX        INTEGER
+        MAX-ACCESS    read-only
+        STATUS        current
+        DESCRIPTION
+            "Rate (in Mbps) of the network interface."
+        ::=  {  networkInterfaceEntry  8  }
+
+
+-- the Status group 
+--
+-- This group of objects provides information concerning the unit's
+-- status.    
+--
+
+    statusMib     OBJECT IDENTIFIER
+    --      Allows an SNMP manager to read the current status of the unit.
+        ::=  {  dsr  3  }
+
+
+    hardware     OBJECT IDENTIFIER
+        ::=  {  statusMib  1  }
+
+    serialNumber   OBJECT-TYPE
+        SYNTAX        OCTET STRING  ( SIZE ( 16  ) )
+        MAX-ACCESS    read-only
+        STATUS        current
+        DESCRIPTION
+            "The unit's serial number."
+        ::=  {  hardware  1  }
+
+
+    accessControl     OBJECT IDENTIFIER
+        ::=  {  statusMib  2  }
+
+    unitAddressTable OBJECT-TYPE
+        SYNTAX             SEQUENCE OF UnitAddressEntry
+        MAX-ACCESS         not-accessible
+        STATUS             current
+        DESCRIPTION
+            "The table of access control processor unit addresses."
+        ::= { accessControl 1 }
+
+    unitAddressEntry OBJECT-TYPE
+        SYNTAX      UnitAddressEntry
+        MAX-ACCESS  not-accessible
+        STATUS      current
+        DESCRIPTION
+            "The table of information relevant to this
+            access control processor unit address table."
+        INDEX      { unitAddressIndex }
+        ::= { unitAddressTable 1 }
+
+    UnitAddressEntry ::= SEQUENCE {
+        unitAddressIndex        INTEGER,
+        unitAddress             OCTET STRING
+    }
+
+    unitAddressIndex  OBJECT-TYPE
+        SYNTAX        INTEGER(1..16)
+        MAX-ACCESS    read-only
+        STATUS        current
+        DESCRIPTION
+            "The index for the table. This corresponds to the access
+            control processor instance."
+        ::= { unitAddressEntry 1 }
+   
+    unitAddress  OBJECT-TYPE
+        SYNTAX        OCTET STRING  ( SIZE ( 19  ) )
+        MAX-ACCESS    read-only
+        STATUS        current
+        DESCRIPTION
+            "The unit address of the access control processor in 
+            the following format: ddd-ddddd-ddddd-ddd, where d 
+            = decimal digit."
+        ::=  { unitAddressEntry 2 }
+
+
+    firmware      OBJECT IDENTIFIER
+        ::=  {  statusMib  3  }
+
+    activeFirmwareVersion     OBJECT-TYPE
+        SYNTAX        OCTET STRING  ( SIZE ( 8 ) )
+        MAX-ACCESS    read-only
+        STATUS        current
+        DESCRIPTION
+            "The version of active firmware code in the following 
+            notation: 0x<major_version>e<engineering_version)."
+        ::=  {  firmware  1  }
+
+    inactiveFirmwareVersion     OBJECT-TYPE
+        SYNTAX        OCTET STRING  ( SIZE ( 8 ) )
+        MAX-ACCESS    read-only
+        STATUS        current
+        DESCRIPTION
+            "The version of inactive (pending) firmware code 
+            in the following notation: 
+            0x<major_version>e<engineering_version)."            
+        ::=  {  firmware  2  }
+
+    codeDownloadState     OBJECT-TYPE
+        SYNTAX        INTEGER  { complete ( 0 ) , waitForPreamble ( 1 ) , waitForPackingList ( 2 ) , receivingDownloadFiles ( 3 ) , waitToActivate ( 4 ) }
+        MAX-ACCESS    read-only
+        STATUS        current
+        DESCRIPTION
+            "Firmware code download state."
+        ::=  {  firmware  3  }
+
+    activationTime     OBJECT-TYPE
+        SYNTAX        TimeTicks
+        MAX-ACCESS    read-only
+        STATUS        current
+        DESCRIPTION
+            "Activation time (in GPS seconds since January 6th, 1980) of firmware code download."            
+        ::=  {  firmware  4  }
+
+    receivedSegments     OBJECT-TYPE
+        SYNTAX        INTEGER  (0..16777215)
+        MAX-ACCESS    read-only
+        STATUS        current
+        DESCRIPTION
+            "Number of firmware code download segments received."
+        ::=  {  firmware  5  }
+
+    totalSegments     OBJECT-TYPE
+        SYNTAX        INTEGER  (0..16777215)
+        MAX-ACCESS    read-only
+        STATUS        current
+        DESCRIPTION
+            "Total number of segments comprising the firmware code download."
+        ::=  {  firmware  6  }
+
+    ledStatus     OBJECT IDENTIFIER
+    --      Allows an SNMP manager to read the current
+    --      LED status of the unit.
+        ::=  {  statusMib  4 }
+
+    signalLED     OBJECT-TYPE
+        SYNTAX        INTEGER  { off ( 0 ) , on ( 1 ) , blink ( 2 )}
+        MAX-ACCESS    read-only
+        STATUS        current
+        DESCRIPTION
+            "The Signal LED is on (illuminated) when the unit
+            has acquired all input signals or blinks if some 
+            but not all signals are acquired.  This object
+            mirrors the LED on the front panel."
+        ::=  {  ledStatus  1  }
+
+    authorizedLED     OBJECT-TYPE
+        SYNTAX        INTEGER  { off ( 0 ) , on ( 1 ) , blink ( 2 )}
+        MAX-ACCESS    read-only
+        STATUS        current
+        DESCRIPTION
+            "The Authorized LED is on (illuminated) when the unit is
+            authorized to decrypt all processed services or blinks
+            if some but not all services are authorized.  This object 
+            mirrors the LED on the front panel."
+        ::=  {  ledStatus  2  }
+
+    alarmLED     OBJECT-TYPE
+        SYNTAX        INTEGER  { off ( 0 ) , on ( 1 ) , blink ( 2 )}
+        MAX-ACCESS    read-only
+        STATUS        current
+        DESCRIPTION
+            "The Alarm LED is on (illuminated) when the IRD is in alarm state."
+        ::=  {  ledStatus  3  }
+
+    downloadLED     OBJECT-TYPE
+        SYNTAX        INTEGER  { off ( 0 ) , on ( 1 ) , blink ( 2 )}
+        MAX-ACCESS    read-only
+        STATUS        current
+        DESCRIPTION
+            "The Download LED is on ( illuminated ) pending activation of a firmware
+            update or blinks while firmware code download is in progress."
+        ::=  {  ledStatus  4  }
+
+    messageLED     OBJECT-TYPE
+        SYNTAX        INTEGER  { off ( 0 ) , on ( 1 ) , blink ( 2 )}
+        MAX-ACCESS    read-only
+        STATUS        current
+        DESCRIPTION
+            "The Message LED is on ( illuminated ) when a message is received and
+            pending operator acknowledgement."
+        ::=  {  ledStatus  5  }
+
+
+    signalStatusMib       OBJECT IDENTIFIER
+    --      Allows an SNMP manager to read the unit's current
+    --      input signal status.
+        ::=  {  statusMib  5  }
+
+    signalStatusTable OBJECT-TYPE
+        SYNTAX             SEQUENCE OF SignalStatusEntry
+        MAX-ACCESS         not-accessible
+        STATUS             current
+        DESCRIPTION
+            "The table of input status."
+        ::= { signalStatusMib 1 }
+
+    signalStatusEntry OBJECT-TYPE
+        SYNTAX     SignalStatusEntry
+        MAX-ACCESS  not-accessible
+        STATUS      current
+        DESCRIPTION
+            "The table of information relevant to this
+            input signal status table."
+        INDEX      { signalStatusIndex}
+        ::= { signalStatusTable 1 }
+
+    SignalStatusEntry ::= SEQUENCE {
+        signalStatusIndex          	 INTEGER,
+        signalType		          	 INTEGER,
+        signalPort		          	 INTEGER,
+        acquisitionState	         INTEGER,
+        frequency					 INTEGER,
+        ebNo						 INTEGER,
+        signalPower					 INTEGER,
+        modulation					 INTEGER,
+        modulationMethod			 INTEGER,
+        symbolRate					 INTEGER,
+        fecRate						 INTEGER
+    }
+
+    signalStatusIndex  OBJECT-TYPE
+        SYNTAX        INTEGER(1..32)
+        MAX-ACCESS    read-only
+        STATUS        current
+        DESCRIPTION
+            "The index for the table."
+        ::= { signalStatusEntry 1 }
+
+    signalType    OBJECT-TYPE
+        SYNTAX        INTEGER  { asi ( 0 ) , rf ( 1 ) ,
+                                 ip ( 2 ) }
+        MAX-ACCESS    read-only
+        STATUS        current
+        DESCRIPTION
+            "The input signal type (ASI, RF, or IP)."
+        ::= { signalStatusEntry 2 }
+
+    signalPort    OBJECT-TYPE
+        SYNTAX        INTEGER
+        MAX-ACCESS    read-only
+        STATUS        current
+        DESCRIPTION
+            "The input signal physical port number."
+        ::= { signalStatusEntry 3 }
+
+    acquisitionState      OBJECT-TYPE
+        SYNTAX        INTEGER  { locked ( 0 ) , unlocked ( 1 )  }
+        MAX-ACCESS    read-only
+        STATUS        current
+        DESCRIPTION
+            "The acquisition state for the signal"
+        ::= { signalStatusEntry 4 }
+
+    frequency          OBJECT-TYPE
+        SYNTAX        INTEGER  ( 950000 .. 2150000  )
+        MAX-ACCESS    read-only
+        STATUS        current
+        DESCRIPTION
+            "The L-band frequency, in kHz, of the RF input signal (signalType = RF)."
+        ::= { signalStatusEntry 5 }
+
+    ebNo          OBJECT-TYPE
+        SYNTAX        INTEGER  ( -20 .. 150  )
+        MAX-ACCESS    read-only
+        STATUS        current
+        DESCRIPTION
+            "The signal to noise ratio, Eb/No, of the RF input signal,
+            measured in units of 0.1 dB.  For example,
+                '-11' represents -1.1 dB
+                '150' represents +15.0 dB"
+        ::= { signalStatusEntry 6 }
+   
+    signalPower   OBJECT-TYPE
+        SYNTAX        INTEGER  ( -80 .. 0  )
+        MAX-ACCESS    read-only
+        STATUS        current
+        DESCRIPTION
+            "The power level of the RF input signal, measured in
+            units of 1.0 dBm.  For example, '-65' represents -65.0 dBm."
+        ::= { signalStatusEntry 7 }
+
+    modulation     OBJECT-TYPE
+        SYNTAX        INTEGER  { dcii ( 0 ) , turbo-8PSK  ( 1 ) ,
+                                 dvb ( 2 )   , dvb-s2 ( 3 ) ,
+                                 dvb-s2x ( 4 ) }
+        MAX-ACCESS    read-only
+        STATUS        current
+        DESCRIPTION
+            "The modulation format of the RF input signal."
+        ::= { signalStatusEntry 8 }
+
+    modulationMethod     OBJECT-TYPE
+        SYNTAX        INTEGER  { mod-bpsk ( 0 ) , mod-qpsk  ( 1 ) ,
+                                 mod-8psk ( 2 )   , mod-8apsk ( 3 ) ,
+                                 mod-16apsk ( 4 ) , mod-32apsk ( 5 ),
+                                 mod-64apsk ( 6 ) , mod-128apsk ( 7 ),
+                                 mod-256apsk ( 8 ) }
+        MAX-ACCESS    read-only
+        STATUS        current
+        DESCRIPTION
+            "The modulation format of the RF input signal."
+        ::= { signalStatusEntry 9 }
+
+    symbolRate     OBJECT-TYPE
+        SYNTAX        INTEGER  ( 1000000 .. 45000000  )
+        MAX-ACCESS    read-only
+        STATUS        current
+        DESCRIPTION
+            "The symbol rate of the RF input signal in units of sps."
+        ::= { signalStatusEntry 10 }
+
+    fecRate       OBJECT-TYPE
+        SYNTAX        INTEGER  { unknown (0), cr5-11 (1), cr1-2 (2), cr3-5 (3),
+								 cr2-3 (4), cr3-4 (5), cr4-5 (6), cr5-6 (7),
+								 cr7-8 (8), cr8-9 (9), cr9-10 (10), cr13-45 (11),
+								 cr9-20 (12), cr1-2-L (13), cr8-15-L (14),
+								 cr11-20 (15), cr5-9-L (16), cr26-45 (17),
+								 cr26-45-L (18), cr3-5-L (19), cr28-45 (20),
+								 cr23-36 (21), cr29-45-L (22), cr2-3-L (23),
+								 cr31-45-L (24), cr25-36 (25), cr32-45 (26),
+								 cr32-45-L (27), cr13-18 (28), cr11-15 (29),
+								 cr11-15-L (30), cr7-9 (31), cr77-90 (32) }
+        MAX-ACCESS    read-only
+        STATUS        current
+        DESCRIPTION
+            "The FEC rate of the RF input signal."
+        ::= { signalStatusEntry 11 }
+
+    acquisitionRecovery     OBJECT-TYPE
+        SYNTAX        INTEGER  { inactive ( 0 ) , active ( 1 )}
+        MAX-ACCESS    read-only
+        STATUS        current
+        DESCRIPTION
+            "The automatic acquisition recovery state of the IRD.  If active, the unit is attempting to 
+            recover from input signal loss by acquiring an alternate input signal."
+        ::= { signalStatusMib 2 }
+
+-- the Trap Receiver group 
+--
+-- This group of objects provides information concerning the unit's
+-- SNMP trap receiver configuration.    
+--
+
+    trapReceiverMib     OBJECT IDENTIFIER
+    --      Allows an SNMP manager to read or write the unit's trap configuration.
+        ::=  {  dsr  4  }
+
+    trapReceiverTable OBJECT-TYPE
+        SYNTAX             SEQUENCE OF TrapReceiverEntry
+        MAX-ACCESS         not-accessible
+        STATUS             current
+        DESCRIPTION
+            "The table of trap receivers."
+        ::= { trapReceiverMib 1 }
+
+    trapReceiverEntry OBJECT-TYPE
+        SYNTAX     TrapReceiverEntry
+        MAX-ACCESS  not-accessible
+        STATUS      current
+        DESCRIPTION
+            "The table entry for trap receivers."
+        INDEX      { trapReceiverIndex}
+        ::= { trapReceiverTable 1 }
+
+    TrapReceiverEntry ::= SEQUENCE {
+        trapReceiverIndex        INTEGER,
+        trapReceiverIpAddress    IpAddress,
+        trapReceiverDestPort     INTEGER,
+        trapRepeatCount          INTEGER,
+        trapInterval             TimeTicks,
+        trapCommunityString		 OCTET STRING,
+        trapEnable               INTEGER
+    }
+
+    trapReceiverIndex  OBJECT-TYPE
+        SYNTAX        INTEGER(1..4)
+        MAX-ACCESS    read-only
+        STATUS        current
+        DESCRIPTION
+            "The index for the table. This corresponds to the trap
+            receiver instance."
+        ::= { trapReceiverEntry 1 }
+   
+    trapReceiverIpAddress  OBJECT-TYPE
+        SYNTAX        IpAddress
+        MAX-ACCESS    read-write
+        STATUS        current
+        DESCRIPTION
+            "The IP address of the trap receiver, in the common
+            dotted-decimal format."
+        ::=  { trapReceiverEntry 2 }
+
+    trapReceiverDestPort  OBJECT-TYPE
+        SYNTAX        INTEGER( 0 .. 65535 )
+        MAX-ACCESS    read-write
+        STATUS        current
+        DESCRIPTION
+            "The trap destination port (default: 162)."
+        ::=  { trapReceiverEntry 3 }
+
+    trapRepeatCount  OBJECT-TYPE
+        SYNTAX        INTEGER(0..7)
+        MAX-ACCESS    read-write
+        STATUS        current
+        DESCRIPTION
+            "The quantity of repeated traps per event (default: 1)."
+        ::=  { trapReceiverEntry 4 }
+
+    trapInterval  OBJECT-TYPE
+        SYNTAX        TimeTicks
+        MAX-ACCESS    read-write
+        STATUS        current
+        DESCRIPTION
+            "The interval (in units of 100 milliseconds) between repeated traps (default: 10)."
+        ::=  { trapReceiverEntry 5 }
+
+    trapCommunityString OBJECT-TYPE
+        SYNTAX        OCTET STRING  ( SIZE ( 1 .. 16 ) )
+        MAX-ACCESS    read-write
+        STATUS        current
+        DESCRIPTION
+            "Trap community string (default: public)."
+        ::=  { trapReceiverEntry 6 }
+
+    trapEnable  OBJECT-TYPE
+        SYNTAX        INTEGER { disabled ( 0 ) , enabled ( 1 ) }
+        MAX-ACCESS    read-write
+        STATUS        current
+        DESCRIPTION
+            "Flag used to disable or enable traps to the associated trap receiver."
+        ::=  { trapReceiverEntry 7 }
+
+
+-- the Traps group 
+--
+-- This group of objects provides information concerning the unit's
+-- SNMP traps.    
+--
+
+    trapsMib     OBJECT IDENTIFIER
+    --      Allows an SNMP manager to read the unit's trap definitions.
+        ::=  {  dsr  5  }
+
+    operStatusTrap   NOTIFICATION-TYPE
+        OBJECTS        { trapId,trapSeqId,trapSev,unitAlarmStatus,eventType,resourceId,trapText }
+        STATUS          current
+        DESCRIPTION     "Trap Message notifying the Operator status parameters"
+        ::=  {  trapsMib  1 }
+
+
+-- the Trap Parameters group 
+--
+-- This group of objects provides information concerning the unit's
+-- SNMP trap objects.    
+--
+
+    trapObjectsMib     OBJECT IDENTIFIER
+    --      Allows an SNMP manager to read the unit's trap parameters.
+        ::=  {  dsr  6  }
+
+    trapId  OBJECT-TYPE
+        SYNTAX        INTEGER  {
+        			  system(1),
+        			  inputSignalPartialServiceLoss(2),
+        			  inputSignalCompleteServiceLoss(3),
+        			  programAuthPartialServiceLoss(4),
+        			  programAuthCompleteServiceLoss(5),
+        			  firmwareCodeUpgradeInProgress(6),
+        			  firmwareCodeUpgradeActPending(7),
+        			  mailboxMessage(8)
+        			  }
+        MAX-ACCESS    accessible-for-notify
+        STATUS        current
+        DESCRIPTION
+            "Unique Identifier for the Trap.  Details as follows:
+            0: reserved
+            1: System-level event or alarm
+            2: Input signal event or alarm; partial loss of service
+            3: Input signal event or alarm; complete loss of service
+            4: Program authorization event or alarm; partial loss of service
+            5: Program authorization event or alarm; complete loss of service
+            6: Firmware code upgrade event; download in progress
+            7: Firmware code upgrade event; download completed, activation pending
+            8: Mailbox message event
+            9-255: reserved
+            "
+        ::=  {  trapObjectsMib  1  }
+         
+    trapSeqId  OBJECT-TYPE
+        SYNTAX        INTEGER  ( 0 .. 255  )
+        MAX-ACCESS    accessible-for-notify
+        STATUS        current
+        DESCRIPTION
+            "Trap Sequence number.  Incremented for each trap sent, per trap receiver."
+        ::=  {  trapObjectsMib  2  }  
+       
+    trapSev  OBJECT-TYPE
+        SYNTAX        INTEGER  { cleared(1),indeterminate(2),warning(3),minor(4),major(5),critical(6) }
+        MAX-ACCESS    accessible-for-notify
+        STATUS        current
+        DESCRIPTION
+            "Trap perceived severity level."
+        ::=  {  trapObjectsMib  3  }    
+               
+    unitAlarmStatus  OBJECT-TYPE
+        SYNTAX        INTEGER { idle(1),indeterminate(2),warning(3),minor(4),major(5),critical(6) } 
+        MAX-ACCESS    accessible-for-notify
+        STATUS        current
+        DESCRIPTION
+            "The unit's current alarm state."
+        ::=  {  trapObjectsMib  4  }
+
+    eventType  OBJECT-TYPE
+        SYNTAX        INTEGER  { system(0),alarmTest(1),signal(2),auth(3),message(4),download(5),decoder(6),transcoder(7),fan(8),temperature(9),other(10) }
+        MAX-ACCESS    accessible-for-notify
+        STATUS        current
+        DESCRIPTION
+            "Trap event type."
+        ::=  {  trapObjectsMib  5  }    
+                          
+    resourceId  OBJECT-TYPE
+        SYNTAX        INTEGER
+        MAX-ACCESS    accessible-for-notify
+        STATUS        current
+        DESCRIPTION
+            "Identifier used to specify a particular IRD resource for which the notification is sent.  
+            Value zero should be specified if only one instance exists.  For example, if eventType 
+            equals 6 (decoder), resourceId is used to specify the decoder instance (value 1 or 
+            greater).  On the other hand, if eventType equals 1 (alarmTest) and only one alarmTest
+            resource is supported, value zero is used."
+        ::=  {  trapObjectsMib  6  }    
+               
+    trapText  OBJECT-TYPE
+        SYNTAX        DisplayString
+        MAX-ACCESS    accessible-for-notify
+        STATUS        current
+        DESCRIPTION
+            "Textual description of the trap."
+        ::=  {  trapObjectsMib  7  }  
+
+END

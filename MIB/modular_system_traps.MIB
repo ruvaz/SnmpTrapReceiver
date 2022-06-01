@@ -1,0 +1,1085 @@
+--                                               asizemot txt template | Rev D
+--
+-- ***************************************************************************
+--
+-- Document Title:    SPECIFICATION,MIB,Modular System Traps
+-- Number:            533291-001 
+-- Revision:          B 
+-- Date:              08 November 2006
+-- Motorola Internal Use
+-- Level 2
+-- Copyright (c) 2005-2006 Motorola, Inc.  All rights reserved.
+-- ************************ PROPRIETARY INFORMATION *************************
+--
+-- All information contained in this document is confidential and proprietary 
+-- to Motorola, Inc. Broadband Communications Sector. No license, expressed 
+-- or implied, under any patent, copyright or trade secret right is granted 
+-- or implied by the conveyance of this document. No part of this document 
+-- may be reproduced, transmitted, transcribed, stored in a retrieval system, 
+-- translated into any language or computer language, in any form or 
+-- by any means, electronic, mechanical, magnetic, optical, chemical, manual, 
+-- or otherwise without the prior written permission of Motorola, Inc. 
+-- Broadband Communications Sector. 
+-- (See Document Security Standard, 320190-000 for details.)
+--
+-- MOTOROLA, the Stylized M Logo and all other trademarks indicated as such 
+-- herein are trademarks of Motorola, Inc.  (r) Reg. U.S. Pat. & Tm. Off.  
+-- All other product or service names are the property of their respective 
+-- owners.
+-- 
+-- Motorola, Inc., Connected Home Solutions,
+-- 6450 Sequence Drive, San Diego, CA 92121  T: 858-455-1500
+--
+-- *************************** REVISION HISTORY ****************************
+-- 
+-- Revision History - 0
+-- Version:           1.0
+-- Notice #:          R032072
+-- Description:       Initial release of MIB for traps in modular system
+-- Originator:        Steve DiDomenico, John Sanders
+-- Incorporated By:   John Sanders
+-- Approved By:       Clive Holborow
+-- Date:              June 30, 2006
+--
+-- Revision History - 1
+-- Version:           1.01
+-- Notice #:          
+-- Description:       Changed RowStatus to "read-create" for trap receiver
+--                    and trap discriminator tables.
+-- Incorporated By:   Jeri Saunders
+-- Approved By:       Clive Holborow
+-- Date:              November 8, 2006
+--
+-- *************************************************************************
+--  Purpose:          This document specifies the structure of the trap
+--                    elements available to Modular System equipment.
+--
+--  MIB Tree:         The following diagram defining the objects in this
+--                    MIB is for reference purposes only.
+--
+--    +..iso(1)
+--       +..org(3)
+--          +..dod(6)
+--             +..internet(1)
+--                +..private(4)
+--                   +..enterprises(1)
+--                      +..gi(1166)
+--          ________________/
+--        /
+--    gi
+--    +..bcs( OID = 1.3.6.1.4.1.1166.7)
+--    |  +..modSysTraps(3)
+--    |  |  +..modSysTrapElements(1)
+--    |  |  |
+--    |  |  |  ALL OF THESE 12 ELEMENTS ARE MANDATORY.
+--    |  |  |  +..trapIdentifier(1)
+--    |  |  |  +..trapSequenceId(2)
+--    |  |  |  +..trapNetworkElemModelNumber(3) 
+--    |  |  |  +..trapNetworkElemSerialNum(4)  
+--    |  |  |  +..trapPerceivedSeverity(5)  
+--    |  |  |  +..trapNetworkElemOperState(6) 
+--    |  |  |  +..trapNetworkElemAlarmStatus(7)  
+--    |  |  |  +..trapNetworkElemAdminState(8)  
+--    |  |  |  +..trapNetworkElemAvailStatus(9)    
+--    |  |  |  +..trapText(10) 
+--    |  |  |  +..trapNELastTrapTimeStamp(11)
+--    |  |  |  +..trapChangedObjectId(12)
+--    |  |  |
+--    |  |  | THESE TRAP ELEMENTS ARE OPTIONAL
+--    |  |  |  +..trapAdditionalInfoInteger1(13)       
+--    |  |  |  +..trapAdditionalInfoInteger2(14)       
+--    |  |  |  +..trapAdditionalInfoInteger3(15)       
+--    |  |  |  +..trapChangedValueDisplayString(16)       
+--    |  |  |  +..trapChangedValueOID(17)       
+--    |  |  |  +..trapChangedValueIPaddress(18)    
+--    |  |  |  +..trapChangedValueInteger(19)
+--    |  |  |  
+--          +..modSysTrapControl(2)
+--    |  |  |  +..numberOftrapReceivers(1) 
+--    |  |  |  +..trapReceiversTable(2)
+--    |  |  |  |  +..trapReceiversEntry(1)
+--    |  |  |  |  |  +..trapReceiversTableIndex(1)
+--    |  |  |  |  |  +..trapReceiverAddr(2)
+--    |  |  |  |  |  +..trapReceiverCommunityString(3)
+--    |  |  |  |  |  +..trapToBeSendQueueSize(4)
+--    |  |  |  |  |  +..trapSentQueueSize(5)
+--    |  |  |  |  |  +..trapThrottlingRate(6)
+--    |  |  |  |  |  +..trapLastSent(7)
+--    |  |  |  |  |  +..trapReceiversEntryOperState(8)
+--    |  |  |  |  |  +..trapResendRequest(9)
+--    |  |  |  |  |  +..trapReceiverEntryStatus(10)
+--
+--    |  |  |  +..numberOfDiscriminators(3)    
+--    |  |  |  +..trapDiscrimTable(4)
+--    |  |  |  |  +..trapDiscrimEntry(1)
+--    |  |  |  |  |  +..trapDiscrimTableIndex(1)  
+--    |  |  |  |  |  +..trapDiscrimReceiverAddr(2) 
+--    |  |  |  |  |  +..trapDiscrimAvailabilityStatus(3) 
+--    |  |  |  |  |  +..trapDiscrimWeeklyMask(4)         
+--    |  |  |  |  |  +..trapDiscrimDailyStartTime(5)     
+--    |  |  |  |  |  +..trapDiscrimDailyStopTime(6)      
+--    |  |  |  |  |  +..trapSeverityDiscrim(7)           
+--    |  |  |  |  |  +..trapDiscrimOperationalState(8)
+--    |  |  |  |  |  +..trapDiscrimConfigChangeCntl(9)
+--    |  |  |  |  |  +..trapDiscrimEntryStatus(10)
+--
+-- ****************************************************************************
+
+MOD-SYS-TRAPS-MIB DEFINITIONS ::= BEGIN
+IMPORTS
+     IpAddress, TimeTicks, OBJECT-TYPE, Integer32, MODULE-IDENTITY
+                           FROM SNMPv2-SMI
+     RowStatus, DisplayString, TEXTUAL-CONVENTION
+                           FROM SNMPv2-TC
+     bcs                   FROM BCS-IDENT-MIB;
+
+modSysTraps MODULE-IDENTITY
+        LAST-UPDATED "200611082000Z"
+        ORGANIZATION "Motorola Connected Home Solutions"
+		CONTACT-INFO "Motorola Technical Response Center
+                      Inside USA     1-888-944-HELP (1-888-044-4357)
+                      Outside USA    1-215-323-0044
+                      TRC Hours:
+                      Monday through Friday 8am - 7pm Eastern Standard Time
+                      Saturdays            10am - 5pm Eastern Standard Time" 
+ 
+        DESCRIPTION  "The MIB module for the modular system common trap objects.This 
+                   MIB is based on the BCS Traps MIB and is intended to produce 100%
+                   compatible traps. The structure is also intended to remain identical
+                   to the BCS traps MIB except that the tables are controlled by 
+                   rowStatus objects and are not limited to 4 receivers."
+
+::= {bcs 3}
+
+-- groups in the MOD-SYS-TRAPS MIB
+
+          modSysTrapElements    OBJECT IDENTIFIER ::= { modSysTraps 1 }
+          modSysTrapControl     OBJECT IDENTIFIER ::= { modSysTraps 2 }
+--
+-- Must define configuration change control state and action values - used by 
+-- Configuration change control traps
+--
+ConfigChangeState ::= TEXTUAL-CONVENTION
+    STATUS       current
+    DESCRIPTION
+            "Represents the current state of a configuration change"
+    SYNTAX       INTEGER { staged(1), applied(2), saved(3) }
+--
+ConfigChangeAction ::= TEXTUAL-CONVENTION
+    STATUS       current
+    DESCRIPTION
+            "Represents the action required to instantiate configuration change."
+    SYNTAX       INTEGER { waitingRetune(1), waitingSave(2), waitingReboot(3) }
+
+--
+--
+--  The Trap Elements Group.
+--
+--  This group contains those objects which are specifically related
+--  to trap and alarm processing by the Motorola agents and proxies.
+--  All standard SNMP traps defined for the differnt standard SNMP MIBs
+--  are always supported. The traps defined here are optional bcs
+--  enterprise specific notofications for bcs products and represent 
+--  only the common portion of the trap PDU.
+--
+--  Trap processing within the agents is controlled by modSysTrapControl
+--  group.   This group includes the definitions of Discriminators 
+--  (Trap Filters).
+--
+--   Within each network agent, there is a mechanism to 
+--   throttle the issuance of traps to the network manager.  
+--   The principles governing the throttling of traps are 
+--   as follows:
+--     (1) Traps should be sent to the manager no faster than 
+--       a pre-determined rate.  This rate is contained in this 
+--       SNMP object  - TrapThrottlingRate 
+--       that can be set by the network manager.  A 
+--       default value of one trap per second is recommended.
+--     (2) The SNMP agent can receive a burst of traps which 
+--       need to be sent to the network manager.  The SNMP 
+--       agent shall have a buffer in which traps can be 
+--       queued for sending to the manager.  The traps should 
+--       be kept in sequence by the time at which the traps 
+--       were received.  An initial buffer limit of 50 traps 
+--       is recommended.  This size may require adjustment 
+--       based on the type of network element, and the types 
+--       of events that can occur.  Max Value is 300 traps.
+--    (3) When the SNMP agent receives a request to send a trap, 
+--       it checks whether the trap is to be forwarded to the
+--       network manager by checking applicable Disriminators, 
+--       If the trap is to be forwared and the trap buffer is full,
+--       a trap message must be discarded.  
+--
+-- *******************************************************************
+
+  trapIdentifier OBJECT-TYPE
+       SYNTAX     INTEGER (1..2147483647)
+       MAX-ACCESS  read-only
+       STATUS      current
+       DESCRIPTION 
+        "This object identifies the specific notification issued by the
+         network element."
+       DEFVAL { 2147483647 }    
+   ::= { modSysTrapElements 1 }
+
+  trapSequenceId OBJECT-TYPE
+	SYNTAX	    INTEGER (1..2147483647)
+	MAX-ACCESS  read-only
+	STATUS	    current
+	DESCRIPTION
+	 "This object identifies the specific notification issued by the
+	  network element."
+   ::= { modSysTrapElements 2 }
+     
+  trapNetworkElemModelNumber OBJECT-TYPE
+       SYNTAX          DisplayString
+       MAX-ACCESS          read-only
+       STATUS          current
+       DESCRIPTION
+        "The value of this object is the model number of
+         the network element.  Combination of Model # and Serial # is used as the unique
+         identifier of the NE."
+  ::= { modSysTrapElements 3}
+
+  trapNetworkElemSerialNum  OBJECT-TYPE
+        SYNTAX          DisplayString
+        MAX-ACCESS      read-only
+        STATUS          current
+        DESCRIPTION
+        "The value of this object is the serial number of
+         the network element. Combination of Model # and Serial # is used as the unique
+         identifier of the NE."
+  ::= { modSysTrapElements 4}
+
+  trapPerceivedSeverity  OBJECT-TYPE
+       SYNTAX          INTEGER
+                 {
+                       cleared(1),
+                       indeterminate(2),
+                       warning(3),
+                       minor(4),
+                       major(5),
+                       critical(6)
+                 }
+       MAX-ACCESS  read-only
+       STATUS      current
+       DESCRIPTION 
+        "This parameter defines five severity levels, which provide 
+        an indication of how it is perceived that the capability 
+        of the managed object has been affected. The other level
+        is not a severity level, but indicates that an alarm has been
+        cleared, and thus is no longer in alarm state.  Note that this 
+        field has no meaning for configuration change traps.          "
+  ::= { modSysTrapElements 5 }
+
+  trapNetworkElemOperState OBJECT-TYPE
+       SYNTAX          INTEGER
+              {
+                   enabled(1),
+                   disabled(2)
+              }
+       MAX-ACCESS      read-only
+       STATUS          current
+       DESCRIPTION 
+            "The current Operational State of the Network Element
+           which generated the trap."
+  ::= { modSysTrapElements 6 }
+
+  trapNetworkElemAlarmStatus  OBJECT-TYPE
+       SYNTAX          INTEGER
+              {
+                       idle(1),        
+                       indeterminate(2),
+                       warning(3),
+                       minor(4),
+                       major(5),
+                       critical(6)
+              }
+       MAX-ACCESS      read-only
+       STATUS          current
+       DESCRIPTION
+         "The current Alarm Status of the Network Element
+          Alarm Status is always equal to the highest severity
+          level of all outstanding alarms in this NE."
+   ::= { modSysTrapElements 7 }
+  
+  trapNetworkElemAdminState  OBJECT-TYPE
+       SYNTAX   INTEGER
+                 {
+                      locked(1),
+                      unlocked(2),
+                      shuttingDown(3)
+                 }
+       MAX-ACCESS     read-only
+       STATUS         current
+       DESCRIPTION
+        "The current Adminsitrative state of the network element."
+  ::= { modSysTrapElements 8 }
+
+  trapNetworkElemAvailStatus    OBJECT-TYPE
+       SYNTAX          INTEGER
+                 {
+                         inTest(1),
+                         failed(2),
+                         powerOff(3),
+                         offLine(4),
+                         offDuty(5),
+                         dependency(6),
+                         degraded(7),
+                         notInstalled(8),
+                         logFull(9),
+                         available(10)
+                   }
+       MAX-ACCESS      read-only
+       STATUS          current
+       DESCRIPTION
+         "The current Operational state of the network elment
+          is defined in ISO/IEC 10164-2."
+  ::= {modSysTrapElements 9 }
+
+  trapText OBJECT-TYPE
+       SYNTAX          DisplayString
+       MAX-ACCESS      read-only
+       STATUS          current
+       DESCRIPTION 
+        "This  variable contains an optional trap text."
+  ::= { modSysTrapElements 10 }
+
+  trapNETrapLastTrapTimeStamp       OBJECT-TYPE
+       SYNTAX      TimeTicks
+       MAX-ACCESS  read-only
+       STATUS      current
+       DESCRIPTION 
+         "This OBJECT IDENTIFIER is used to hold time since NE was 'CHANGED'
+          last time.  'CHANGE' is defined as:
+          1) any write operation was performed on this NE which caused a trap.
+          2) any alarm was generated by this NE which caused a trap.
+          3) any alarm was cleared on this NE which caused a trap."
+  ::= { modSysTrapElements 11 }
+
+  trapChangedObjectId OBJECT-TYPE
+       SYNTAX          DisplayString
+       MAX-ACCESS      read-only
+       STATUS          current
+       DESCRIPTION 
+        "This  variable identifies the object that
+ 	 has generated the trap."
+  ::= { modSysTrapElements 12 }
+
+-- *************************************************************************************
+-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+-- *************************************************************************************
+--             The above Trap Elements HAVE to be included in every trap !
+--   The following trap elements are included in trap pdu if appropriate.
+-- *************************************************************************************
+-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+-- *************************************************************************************
+
+  trapAdditionalInfoInteger1       OBJECT-TYPE
+       SYNTAX          INTEGER (1..2147483647)
+       MAX-ACCESS      read-only
+       STATUS          current
+       DESCRIPTION 
+        "This 32 bit integer is used to hold specific information about 
+         the trap."
+       DEFVAL { 2147483647 }     
+  ::= { modSysTrapElements 13 }
+
+  trapAdditionalInfoInteger2       OBJECT-TYPE
+       SYNTAX          INTEGER (1..2147483647)
+       MAX-ACCESS      read-only
+       STATUS          current
+       DESCRIPTION 
+        "This 32 bit integer is used to hold specific information about 
+         the trap.           "
+       DEFVAL { 2147483647 }       
+  ::= { modSysTrapElements 14 }
+
+  trapAdditionalInfoInteger3       OBJECT-TYPE
+       SYNTAX          INTEGER (1..2147483647)
+       MAX-ACCESS      read-only
+       STATUS          current
+       DESCRIPTION 
+        "This 32 bit integer is used to hold specific information about 
+         the trap.            "
+       DEFVAL { 2147483647 }       
+  ::= { modSysTrapElements 15 }
+ 
+  trapChangedValueDisplayString       OBJECT-TYPE
+       SYNTAX          DisplayString
+       MAX-ACCESS      read-only
+       STATUS          current
+       DESCRIPTION 
+        "This DisplayString is used to hold specific information about
+         the trap."
+  ::= { modSysTrapElements 16 }
+
+  trapChangedValueOID       OBJECT-TYPE
+       SYNTAX          DisplayString
+       MAX-ACCESS      read-only
+       STATUS          current
+       DESCRIPTION 
+        "This OBJECT IDENTIFIER is used to hold specific information about 
+        the trap."
+  ::= { modSysTrapElements 17 }
+
+  trapChangedValueIpAddress    OBJECT-TYPE
+       SYNTAX          IpAddress
+       MAX-ACCESS      read-only
+       STATUS          current
+       DESCRIPTION 
+        "This OBJECT IDENTIFIER is used to hold specific information about 
+        the trap."
+  ::= { modSysTrapElements 18 }
+                       
+  trapChangedValueInteger       OBJECT-TYPE
+       SYNTAX          INTEGER (1..2147483647)
+       MAX-ACCESS          read-only
+       STATUS          current
+       DESCRIPTION 
+        "This 32 bit integer is used to hold specific information about 
+         the trap.          "
+       DEFVAL { 2147483647 }       
+  ::= { modSysTrapElements 19 }
+
+-- ****************************************************************
+--
+-- TRAP DEFINITIONS
+--
+--
+-- Every trap generated by any BCS agent will include the first 12 identical
+-- fields. If particular variable is not supported in
+-- particular TRAP then a default value will be returned.
+--
+-- DESCRIPTION will include explanation of use of generic
+-- variables (trapChangedValue******.)  If no
+-- DESCRIPTION is given then generic variables will contain
+-- default values.
+--
+--         THE FOLLOWING TRAPS ARE SHOWN FOR REFERENCE ONLY.
+--         THEY SHOULD BE DUPLICATED FOR ALL SUPPORTED BCS PRODUCTS
+--         
+--
+--         THE REMAINDER OF THE TRAP DEFINITION SHOULD NOT CHANGE.
+--
+-- *****************************************************************
+--
+--   trapNewNEFound NOTIFICATION-TYPE
+--       OBJECTS
+--            {       
+--                trapIdentifier,
+--		  trapSequenceId,
+--                trapNetworkElemModelNumber,
+--                trapNetworkElemSerialNum,
+--                trapPerceivedSeverity,
+--                trapNetworkElemOperState,
+--                trapNetworkElemAlarmStatus,  
+--                trapNetworkElemAdminState,
+--                trapNetworkElemAvailStatus,
+--                trapText,
+--                trapNETrapLastTrapTimeStamp
+--                trapChangedObjectId
+--            }
+--
+--       STATUS             CURRENT
+--
+--       DESCRIPTION
+--         "This trap is isssued if a Proxy Agent Detected A New NE.
+--          trapPerceivedSeverity - 'indeterminate'
+--          trapChangedObjectId - This identifies the new Network Element.
+--            Typically, this will be the oid+instance of a table row in 
+--            the proxy agent which contains information about the proxied 
+--            agents.  The manager is expected to go to this row of the 
+--            indicated table and read the information about the new 
+--            proxy.  The table is implementation specific, but for NLS
+--            TNS devices, it is HFCCommon.  "
+--          
+--  ::= {bcsEvents 1}
+--
+--
+--  trapNewNELost NOTIFICATION-TYPE
+--       STATUS             CURRENT
+--       OBJECTS
+--            {       
+--                trapIdentifier,
+--		  trapSequenceId,
+--                trapNetworkElemModelNumber,
+--                trapNetworkElemSerialNum,
+--                trapPerceivedSeverity,
+--                trapNetworkElemOperState,
+--                trapNetworkElemAlarmStatus,  
+--                trapNetworkElemAdminState,
+--                trapNetworkElemAvailStatus,
+--                trapText,
+--                trapNETrapLastTrapTimeStamp
+--                trapChangedObjectId
+--            }
+--       DESCRIPTION
+--        "This trap is isssued if a Proxy Agent lost communication with NE. 
+--         trapPerceivedSeverity - 'critical'
+--         trapChangedObjectId - This identifies the lost Network Element."
+--            Typically, this will be the oid+instance of a table row in 
+--            the proxy agent which contains information about the proxied 
+--            agents.  The manager is expected to go to this row of the 
+--            indicated table and read the information about the new 
+--            proxy.  The table is implementation specific, but for NLS
+--            TNS devices, it is HFCCommon.  "
+--  ::= { bcsEvents 2}
+--
+--
+--   trapConfigurationChangeInteger NOTIFICATION-TYPE
+--       STATUS             CURRENT
+--       OBJECTS
+--            {       
+--                        trapIdentifier,
+--		  	  trapSequenceId,
+--                        trapNetworkElemModelNumber,
+--                        trapNetworkElemSerialNum,
+--                        trapPerceivedSeverity,
+--                        trapNetworkElemOperState,
+--                        trapNetworkElemAlarmStatus,  
+--                        trapNetworkElemAdminState,
+--                        trapNetworkElemAvailStatus,
+--                        trapText,
+--                        trapNETrapLastTrapTimeStamp
+--                        trapChangedObjectId,
+--                        trapChangedValueInteger,
+--                        trapAdditionalInfoInteger1,       
+--                        trapAdditionalInfoInteger2
+--             }
+--       DESCRIPTION
+--        "This trap is issued if configuration of a single variable
+--         with integer type was changed (via ANY interface).  
+--         TrapChangedValueInteger variable may contain current reading
+--         of that variable.
+--         trapPerceivedSeverity - 'indeterminate'"
+--  ::= {bcsEvents 3}
+--
+--
+--   trapConfigurationChangeDisplayString NOTIFICATION-TYPE
+--       STATUS             CURRENT
+--       OBJECTS
+--            {       
+--                        trapIdentifier,
+--		          trapSequenceId,
+--                        trapNetworkElemModelNumber,
+--                        trapNetworkElemSerialNum,
+--                        trapPerceivedSeverity,
+--                        trapNetworkElemOperState,
+--                        trapNetworkElemAlarmStatus,  
+--                        trapNetworkElemAdminState,
+--                        trapNetworkElemAvailStatus,
+--                        trapText,
+--                        trapNETrapLastTrapTimeStamp
+--                        trapChangedObjectId,
+--                        trapChangedValueDisplayString,
+--                        trapAdditionalInfoInteger1,       
+--                        trapAdditionalInfoInteger2
+--            }
+--       DESCRIPTION
+--        "This trap is issued if configuration of a single variable
+--         with DispalayString type was changed (via ANY interface).  
+--         TrapChangedValueDisplayString variable may contain current reading
+--         of that variable.
+--         trapPerceivedSeverity - 'indeterminate'"
+--  ::= {bcsEvents 4}
+--
+--
+--   trapConfigurationChangeOID NOTIFICATION-TYPE
+--
+--       OBJECTS
+--               {       
+--                        trapIdentifier,
+--		          trapSequenceId,
+--                        trapNetworkElemModelNumber,
+--                        trapNetworkElemSerialNum,
+--                        trapPerceivedSeverity,
+--                        trapNetworkElemOperState,
+--                        trapNetworkElemAlarmStatus,  
+--                        trapNetworkElemAdminState,
+--                        trapNetworkElemAvailStatus,
+--                        trapText,
+--                        trapNETrapLastTrapTimeStamp
+--                        trapChangedObjectId,
+--                        trapChangedValueOID,
+--                        trapAdditionalInfoInteger1,       
+--                        trapAdditionalInfoInteger2
+--               }
+--       STATUS             CURRENT
+--
+--       DESCRIPTION
+--        "This trap is issued if configuration of a single variable
+--         with OID type was changed (via ANY interface).  
+--         trapChangedValueOID variable may contain current reading
+--         of that variable.
+--         trapPerceivedSeverity - 'indeterminate'"
+--  ::= {bcsEvents 5}
+--
+--   trapConfigurationChangeIpAddr NOTIFICATION-TYPE
+--
+--       OBJECTS
+--            {       
+--                        trapIdentifier,
+--		          trapSequenceId,
+--                        trapNetworkElemModelNumber,
+--                        trapNetworkElemSerialNum,
+--                        trapPerceivedSeverity,
+--                        trapNetworkElemOperState,
+--                        trapNetworkElemAlarmStatus,  
+--                        trapNetworkElemAdminState,
+--                        trapNetworkElemAvailStatus,
+--                        trapText,
+--                        trapNETrapLastTrapTimeStamp
+--                        trapChangedObjectId,
+--                        trapChangedValueIpAddress,
+--                        trapAdditionalInfoInteger1,       
+--                        trapAdditionalInfoInteger2
+--            }
+--       STATUS             CURRENT
+--
+--       DESCRIPTION
+--         "This trap is issued if configuration of a single variable
+--          with IpAddress type was changed (via ANY interface).  
+--          trapChangedValueIpAddress variable may contain current reading
+--          of that variable.
+--          trapPerceivedSeverity - 'indeterminate'"
+--  ::= {bcsEvents 6}
+--
+--
+--  trapToBeSendQueueOverflow NOTIFICATION-TYPE
+--
+--       OBJECTS
+--            {       
+--                        trapIdentifier
+--			  trapSequenceId 
+--                        trapNetworkElemModelNumber 
+--                        trapNetworkElemSerialNum  
+--                        trapPerceivedSeverity  
+--                        trapNetworkElemOperState 
+--                        trapNetworkElemAlarmStatus  
+--                        trapNetworkElemAdminState  
+-- 			  trapNetworkElemAvailStatus    
+--			  trapText 
+--			  trapChangedObjectId
+--			  trapChangedValueInteger
+--			  trapNELastTrapTimeStamp
+--            }
+--       STATUS             CURRENT
+--
+--       DESCRIPTION
+--         "This trap is issued if SNMP agent's trapToBeSendQueue is full.
+--          trapPerceivedSeverity - 'major'
+--          trapNetworkElemModelNumber - Model # of the Agent
+--          trapNetworkElemSerialNum - Serial # of the Agent
+--          trapNetworkElemOperState - from Ident MIB
+--          trapNetworkElemAlarmStatus - from Ident MIB   
+--          trapNetworkElemAdminState - from Ident MIB
+--          trapNetworkElemAvailStatus - from Ident MIB"
+--  ::= { bcsevents 7}
+--
+
+
+-- ********************************************************************************
+--           Example traps - Each of these is product specific, 
+--     and these examples are for a fictional non-existant product, and 
+--     would appear in that products MIB.
+-- ********************************************************************************
+--
+--
+--
+--  trapVeryImportantAlarm NOTIFICATION-TYPE
+--
+--       OBJECTS
+--            {       
+--                        trapIdentifier,
+--		          trapSequenceId,
+--                        trapNetworkElemModelNumber,
+--                        trapNetworkElemSerialNum,
+--                        trapPerceivedSeverity,
+--                        trapNetworkElemOperState,
+--                        trapNetworkElemAlarmStatus,  
+--                        trapNetworkElemAdminState,
+--                        trapNetworkElemAvailStatus,
+--                        trapText,
+--                        trapNETrapLastTrapTimeStamp
+--                        trapChangedObjectId,
+--                        trapChangedValueInteger
+--            }
+--	 STATUS             CURRENT
+--       DESCRIPTION
+--        " This trap is issued if Very Important parameter is out of range.
+--          trapChangedValueInteger variable contains current reading of 
+--          the Very Important parameter."
+--  ::= { bcsevents 11111}
+--
+--  NOTE: trapPerceivedSeverity is set to the appropriate severity level when
+--       declaring this alarm, and is set to cleared(1) when this alarm is
+--       no longer active.  The same trap id of 11111 is still used in both cases.
+--
+--
+--  trapVeryImportantTableRowChange NOTIFICATION-TYPE
+
+--       OBJECTS
+--            {       
+--                        trapIdentifier,
+--		          trapSequenceId,
+--                        trapNetworkElemModelNumber,
+--                        trapNetworkElemSerialNum,
+--                        trapPerceivedSeverity,
+--                        trapNetworkElemOperState,
+--                        trapNetworkElemAlarmStatus,  
+--                        trapNetworkElemAdminState,
+--                        trapNetworkElemAvailStatus,
+--                        trapText,
+--                        trapNETrapLastTrapTimeStamp
+--                        trapChangedObjectId,
+--                        trapChangedValueOID
+--            }
+--
+--	STATUS             CURRENT
+--
+--       DESCRIPTION
+--        "This trap is issued if a row in Very Important Table was changed. 
+--         Lets assume what each row consists of 25 vars.  Some USER updated
+--         one row of our table with 25 new values. . .    
+--         Instead of issuing 25 traps (1 for each element in the changed row)
+--         we are issuing 1 trap for the entire change.
+--
+--         trapChangedObjectId contains pointer to the Very Important Table.
+--         trapChangedValueOID contains pointer to the particular row.
+--
+--         In case of configuration change of the single variable
+--         trapConfigurationChange****** trap-type should be used"
+--
+--  ::= {22222}
+--
+--  Notice that is this case, a special exception has been made to the fact that 
+--  all configuration changes use trap id's 3 through 6.  Special circumstances
+--  of a particular product can dictate the use of trap id's which are 
+--  traditionally used only for alarms to indicate configuration changes.
+--
+--
+--  ***************************************************************
+--
+-- modSysTrapControl group
+--
+
+  numberOfTrapReceivers OBJECT-TYPE
+       SYNTAX           INTEGER (1..4)
+       MAX-ACCESS       read-only
+       STATUS          current
+       DESCRIPTION
+        "The number of managers to send traps to.
+         No longer needed but retained for compatibility.
+         No limit on number of recievers imposed by this MIB."
+  ::= { modSysTrapControl 1 }
+
+  trapReceiversTable OBJECT-TYPE
+     SYNTAX          SEQUENCE OF TrapReceiversEntry
+     MAX-ACCESS      not-accessible
+     STATUS          current
+     DESCRIPTION
+       "A list of managers to send traps to.  The number of
+        entries is given by the value of NumTrapReceivers.
+        No limit on number of recievers imposed by this MIB."
+   ::= { modSysTrapControl 2 }
+
+  trapReceiversEntry OBJECT-TYPE
+       SYNTAX          TrapReceiversEntry
+       MAX-ACCESS      not-accessible
+       STATUS          current
+       DESCRIPTION
+         "The list of managers to send traps."
+       INDEX  {trapReceiversTableIndex}
+  ::= { trapReceiversTable 1 }
+
+  TrapReceiversEntry ::= 
+	SEQUENCE {
+               trapReceiversTableIndex          INTEGER,
+               trapReceiverAddr                 IpAddress,
+               trapReceiverCommunityString      DisplayString,
+               trapToBeSendQueueSize            INTEGER (50..1000),
+               trapSentQueueSize                INTEGER (50..300),
+               trapThrottlingRate               Integer32,
+               trapLastSent                     INTEGER (1..2147483647),        
+               trapReceiversEntryOperState      INTEGER,
+               trapResendRequest                Integer32,
+               trapReceiverEntryStatus          RowStatus
+               }
+
+  trapReceiversTableIndex OBJECT-TYPE
+       SYNTAX          INTEGER
+       MAX-ACCESS      not-accessible
+       STATUS          current
+       DESCRIPTION
+        "The index to a trap receiver entry."
+  ::= { trapReceiversEntry 1 }
+
+  trapReceiverAddr OBJECT-TYPE
+       SYNTAX          IpAddress
+       MAX-ACCESS      read-write
+       STATUS          current
+       DESCRIPTION
+         "The IP address of the manager to send a trap to.
+          NOTE: Changing TrapReceiverAddr FROM default value to
+          anything else is equivalent of 'creating' of a new entry.
+          Changing trapReceiverAddr TO default value will result
+          in deletion of that entry."
+   ::= { trapReceiversEntry 2 }
+
+  trapReceiverCommunityString OBJECT-TYPE
+       SYNTAX          DisplayString
+       MAX-ACCESS      read-write
+       STATUS          current
+       DESCRIPTION
+        "The community name to use in the trap when
+         sent to the manager."
+   ::= { trapReceiversEntry 3 }
+
+  trapToBeSendQueueSize OBJECT-TYPE
+       SYNTAX          INTEGER (50..1000)
+       MAX-ACCESS      read-write
+       STATUS          current
+       DESCRIPTION
+        "The agent maintains 2 queues: TrapsToBeSendQueue and TrapsSentQueue.
+         The SNMP agent can receive a burst of traps which need to be sent
+         to the network manager.  The SNMP agent will put them in
+         TrapsToBeSendQueue and from there hi will send traps to the
+         a manager at throttling rate.  The traps will be kept in sequence
+         by the time at which they came in "
+     DEFVAL { 50 }
+  ::= { trapReceiversEntry 4 }
+
+  trapSentQueueSize OBJECT-TYPE
+       SYNTAX          INTEGER (50..300)
+       MAX-ACCESS      read-write
+       STATUS          current
+       DESCRIPTION
+        "The agent maintains 2 queues: TrapsToBeSendQueue and TrapsSentQueue.
+         The SNMP agent maintains Trap History (TrapsSentQueue) by saving last 'X'
+         sent traps."
+    DEFVAL { 50 }
+  ::= { trapReceiversEntry 5 }
+
+  trapThrottlingRate OBJECT-TYPE
+       SYNTAX          Integer32
+       MAX-ACCESS      read-write
+       STATUS          current
+       DESCRIPTION
+        "The number of traps agent can send to a particular manager
+         (trapReceiver) per second. "
+     DEFVAL { 1 }
+   ::= { trapReceiversEntry 6 }
+
+  trapLastSent OBJECT-TYPE
+       SYNTAX          INTEGER (1..2147483647)
+       MAX-ACCESS      read-only
+       STATUS          current
+       DESCRIPTION
+        "This variable contains the last trapSequenceId (sequence number) 
+         agent sent to this manager.  Upon startup agent will send
+         cold-start trap and set value of TrapLastSent to 1."
+    DEFVAL { 1 }
+  ::= { trapReceiversEntry 7 }
+
+  trapReceiversEntryOperState  OBJECT-TYPE
+       SYNTAX          INTEGER
+              {
+                             enabled(1),
+                             disabled(2)
+              }
+       MAX-ACCESS      read-write
+       STATUS          current
+       DESCRIPTION 
+        "The current Operational State of this entry
+         in trapReceivers Table "
+       DEFVAL { disabled }
+  ::= { trapReceiversEntry 8 }
+
+  trapResendRequest OBJECT-TYPE
+       SYNTAX          Integer32
+       MAX-ACCESS      read-write
+       STATUS          current
+       DESCRIPTION
+        "The manager may write this object when the indicated trap 
+         (indicated via trapIdentifier) should be resent.  It is not 
+         intended to be read by the manager, but is read-write for
+         compatability with older SNMP compilers."
+       DEFVAL { 2147483647 }
+   ::= { trapReceiversEntry 9 }
+
+   trapReceiverEntryStatus OBJECT-TYPE
+       SYNTAX          RowStatus
+       MAX-ACCESS      read-create
+       STATUS          current
+       DESCRIPTION		"Status of this entry."
+   ::= { trapReceiversEntry 10 }
+
+-- //////////////////////////////////////////////////////////////////
+
+  numberOfDiscriminators OBJECT-TYPE
+       SYNTAX          INTEGER  (1..2147483647)
+       MAX-ACCESS      read-only
+       STATUS          current
+       DESCRIPTION
+         "The number of EFDs (filters) agent has in it's database.
+          This number can not exceed 20 " 
+       DEFVAL { 2147483647 }
+  ::= { modSysTrapControl 3 }
+
+  trapDiscrimTable OBJECT-TYPE
+       SYNTAX          SEQUENCE OF TrapDiscrimEntry
+       MAX-ACCESS      not-accessible
+       STATUS          current
+       DESCRIPTION
+         "A list of EFDs (trap filters).  Before forwarding trap to
+          a trapReceiver (manager) agent filters all traps acording
+          to all EFDs defined for this manager."
+   ::= { modSysTrapControl 4 }
+
+  trapDiscrimEntry OBJECT-TYPE
+       SYNTAX          TrapDiscrimEntry
+       MAX-ACCESS      not-accessible
+       STATUS          current
+       DESCRIPTION
+         "The list of discriminators (trap filters.)"
+       INDEX  { trapDiscrimTableIndex}
+   ::= { trapDiscrimTable 1 }
+
+  TrapDiscrimEntry ::=  SEQUENCE 
+		{
+                    trapDiscrimTableIndex          INTEGER (1..20),
+                    trapDiscrimReceiverAddr        IpAddress,
+                    trapDiscrimAvailabilityStatus  INTEGER,
+                    trapDiscrimWeeklyMask          DisplayString (SIZE (0..6)),
+                    trapDiscrimDailyStartTime      INTEGER (0..1439),
+                    trapDiscrimDailyStopTime       INTEGER (0..1439),
+                    trapSeverityDiscrim            INTEGER,
+                    trapDiscrimOperationalState    INTEGER,
+                    trapDiscrimConfigChangeCntl    INTEGER,
+                    trapDiscrimEntryStatus         RowStatus
+                 }
+
+  trapDiscrimTableIndex OBJECT-TYPE
+       SYNTAX          INTEGER (1..20)
+       MAX-ACCESS      not-accessible
+       STATUS          current
+       DESCRIPTION
+        "The index to a trap discriminator entry."
+   ::= { trapDiscrimEntry 1 }
+
+ trapDiscrimReceiverAddr OBJECT-TYPE
+       SYNTAX          IpAddress
+       MAX-ACCESS          read-write
+       STATUS          current
+       DESCRIPTION
+         "The IP address of the manager this Discrim belongs to.
+          It should be equal to TrapReceiverAddr.
+          NOTE: Changing trapDiscrimReceiverAddr FROM default value to
+          anything else is equivalent of 'creating' of a new entry.
+          Changing trapReceiverAddr TO default value will result
+          in deletion of that entry."
+  ::= { trapDiscrimEntry 2 }
+
+  trapDiscrimAvailabilityStatus     OBJECT-TYPE
+       SYNTAX          INTEGER
+              {
+                       offDuty(5),
+                       available(10)
+              }
+       MAX-ACCESS      read-only
+       STATUS          current
+       DESCRIPTION 
+        "This object reflects the current Availability status of the
+         Discrim (based on ISO/IEC 10164-2)."
+  ::= { trapDiscrimEntry 3 }
+
+  trapDiscrimWeeklyMask                     OBJECT-TYPE
+       SYNTAX          DisplayString   (SIZE (0..6))
+       MAX-ACCESS      read-write
+       STATUS          current
+       DESCRIPTION
+        "This object represents weekly scedule for corresponding
+         Discrim.  The WeeklyMask consists of 7 numeric 
+         characters (1 for each day of the week).  Each numeric
+         character can take a value of eather '1' - enabled or 
+         '2' - disabled.  For example, with WeeklyMask='1122221',
+         an agent will aplly corresponding Disriminator only on
+         Mondays, Tuesdays and Sundays.
+         Any characters other than '1' and '2' will be ignored." 
+  ::= { trapDiscrimEntry 4 }
+
+  trapDiscrimDailyStartTime         OBJECT-TYPE
+       SYNTAX      INTEGER (0..1439)
+       MAX-ACCESS  read-write
+       STATUS      current
+       DESCRIPTION
+        "This object represents daily start time for corresponding
+         Discrim.  The StartTime is expressed as an offset
+         (in minutes) from 2400 hours military time.  For example,
+         StartTime=70 represents start time of 1:10 AM."
+  ::= { trapDiscrimEntry 5 }
+
+  trapDiscrimDailyStopTime          OBJECT-TYPE
+       SYNTAX     	   INTEGER (0..1439)
+       MAX-ACCESS          read-write
+       STATUS          current
+       DESCRIPTION
+        "This object represents daily stop time for corresponding
+        Discrim.  The StopTime is expressed as an offset
+        (in minutes) from 2400 hours military time.  For example,
+        StopTime=70 represents stop time of 1:10 AM."
+  ::= { trapDiscrimEntry 6 }
+
+  trapSeverityDiscrim                       OBJECT-TYPE
+       SYNTAX      INTEGER
+             {
+                   indeterminate(2),
+                   warning(3),
+                   minor(4),
+                   major(5),
+                   critical(6)
+             }
+       MAX-ACCESS          read-write
+       STATUS          current
+       DESCRIPTION
+        "The severity threshold of traps to be send to the manager.
+         Only traps of equal or greater severity than
+         this value are sent to the manager."
+  ::= { trapDiscrimEntry 7 }
+
+  trapDiscrimOperationalState  OBJECT-TYPE
+       SYNTAX          INTEGER
+               {
+                    enabled(1),
+                    disabled(2)
+               }
+       MAX-ACCESS      read-write
+       STATUS          current
+       DESCRIPTION 
+        "The current Operational State of the Discriminator. "
+       DEFVAL { disabled }
+  ::= { trapDiscrimEntry 8 }
+
+  trapDiscrimConfigChangeCntl        OBJECT-TYPE
+       SYNTAX          INTEGER
+                {
+                        on(1),
+                        off(2)
+                }
+       MAX-ACCESS      read-write
+       STATUS          current
+       DESCRIPTION 
+        "This variable turns reporting of configuration changes 
+         on or off. "
+       DEFVAL { on }
+  ::= { trapDiscrimEntry 9 }
+
+  trapDiscrimEntryStatus         OBJECT-TYPE
+       SYNTAX          RowStatus
+       MAX-ACCESS      read-create
+       STATUS          current
+       DESCRIPTION     "Status of this entry."
+  ::= { trapDiscrimEntry 10 }
+ 
+END

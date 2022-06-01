@@ -1,0 +1,1409 @@
+-- *****************************************************************************
+--
+-- Document Title:  Mux Broadcast Network Controller (Mux BNC) MIB
+--
+-- Date:            May 15, 2020
+--
+-- Copyright (c) 2020 CommScope Holding Company, Inc.  All rights reserved
+--
+-- *********************** Proprietary Information *****************************
+--
+-- All information contained in this document is confidential and proprietary
+-- to CommScope Holding Company, Inc.
+--
+
+ARRIS-MUX-BNC-MIB DEFINITIONS ::= BEGIN
+
+IMPORTS
+  OBJECT-TYPE, MODULE-IDENTITY, NOTIFICATION-TYPE, Gauge32, Integer32,
+  IpAddress, TimeTicks, mgmt
+    FROM SNMPv2-SMI
+  OBJECT-GROUP, NOTIFICATION-GROUP FROM SNMPv2-CONF
+  DisplayString, DateAndTime, TruthValue, RowStatus
+    FROM SNMPv2-TC;
+
+arrisMuxBNC  MODULE-IDENTITY
+   LAST-UPDATED "202005150000Z"  
+   ORGANIZATION "CommScope"
+   CONTACT-INFO
+   "CommScope Technical Assistance Center (TAC) provides access to technicians
+    24 hours a day, 7 days a week for all products.  To open a case, use
+    one of the following methods:
+    - E-mail at tac.helpdesk@commscope.com
+    - Telephone in North America at 888-944-HELP (888-944-4357)
+    - Telephone outside of North America at IDD (International Direct Dialing)
+      number +1-215-323-2345
+    - For Spanish language support, telephone at 215-323-2346"
+   DESCRIPTION  "An SMIv2 MIB module for the CommScope Mux BNC 4.x product."
+   REVISION "202005150000Z"
+   DESCRIPTION
+     "- Added tme2020 as an enumerated network element type in bcnElementType and
+        corrected typographical errors in non-normative text."
+   ::= { iso org(3) dod(6) internet(1) private(4) enterprises(1) gi(1166) giproducts(1) 102 }
+
+   mib-2                  OBJECT IDENTIFIER ::= { mgmt 1 }
+   system                 OBJECT IDENTIFIER ::= { mib-2 1 }
+   bncSystem              OBJECT IDENTIFIER ::= { arrisMuxBNC 1 }
+   bncSysTraps            OBJECT IDENTIFIER ::= { bncSystem 100 }  
+   arrisMuxBncConformance OBJECT IDENTIFIER ::= { arrisMuxBNC 101 }
+   bcs                    OBJECT IDENTIFIER ::= { iso 3 6 1 4 1 1166 7 } 
+   bcsIdent               OBJECT IDENTIFIER ::= { bcs 1 }
+   modSysTraps            OBJECT IDENTIFIER ::= { bcs 3 }
+   modSysTrapElements     OBJECT IDENTIFIER ::= { modSysTraps 1 }
+   modSysTrapControl      OBJECT IDENTIFIER ::= { modSysTraps 2 }
+
+-- =============================================================================
+-- Conformance OBJECT-GROUP and NOTIFICATION-GROUP constructs
+-- =============================================================================
+
+   bncSystemConf OBJECT-GROUP
+    OBJECTS {
+     bncIdNumber,
+     bncPlatformHealthStatus,
+     bncPlatformHealthStatusLastChange
+    }
+    STATUS current
+    DESCRIPTION "conformance"
+   ::= { arrisMuxBncConformance 1 }
+
+   bncGroupConformance OBJECT-GROUP
+    OBJECTS {
+     bncGroupName,
+     bncGroupHealthStatus,
+     bncGroupHealthStatusLastChange
+    }
+    STATUS current
+    DESCRIPTION "conformance"
+   ::= { arrisMuxBncConformance 2 }
+
+   bncElementConf OBJECT-GROUP
+    OBJECTS {
+     bncElementName,
+     bncElementIpAddress,
+     bncElementType,
+     bncElementRedundancyGroupID,
+     bncElementRedundancyGroupName,
+     bncElementRedundancyRole,
+     bncElementRequestedOpState,
+     bncElementActualOpState,
+     bncElementHealthStatus,
+     bncElementHealthStatusLastChange,
+     bncElementPositionID
+    }
+    STATUS current
+    DESCRIPTION "conformance"
+   ::= { arrisMuxBncConformance 3 }
+
+   bncDatabaseConnectionsConf OBJECT-GROUP
+    OBJECTS {
+     bncDatabaseConnections,
+     bncDatabaseImageSize,
+     bncDatabaseLastBackup,
+     bncDatabaseNextBackup
+    }
+    STATUS current
+    DESCRIPTION "conformance"
+   ::= { arrisMuxBncConformance 4 }
+
+   bncServiceConf OBJECT-GROUP
+    OBJECTS {
+     bncServiceName,
+     bncServiceEncryptionMode,
+     bncServicePLADEncryptionMode,
+     bncDatabaseNextBackup
+    }
+    STATUS current
+    DESCRIPTION "conformance"
+   ::= { arrisMuxBncConformance 5 }
+
+   bncProgramConf OBJECT-GROUP
+    OBJECTS {
+     bncProgramName,
+     bncProgramStartTime,
+     bncProgramEndTime,
+     bncProgramCatvTier1,
+     bncProgramCatvTier2,
+     bncProgramCatvTier3,
+     bncProgramCatvTier4,
+     bncProgramCatvTier5,
+     bncProgramCatvTier6,
+     bncProgramCatvTier7,
+     bncProgramCatvTier8,
+     bncProgramDbsTier1,
+     bncProgramDbsTier2,
+     bncProgramDbsTier3,
+     bncProgramDbsTier4,
+     bncProgramDbsTier5,
+     bncProgramDbsTier6,
+     bncProgramDbsTier7,
+     bncProgramDbsTier8
+    }
+    STATUS current
+    DESCRIPTION "conformance"
+   ::= { arrisMuxBncConformance 6 }
+
+   modularTraps OBJECT-GROUP
+    OBJECTS {
+     trapIdentifier,
+     trapSequenceId,
+     trapNetworkElemModelNumber,
+     trapNetworkElemSerialNum,
+     trapPerceivedSeverity,
+     trapNetworkElemOperState,
+     trapNetworkElemAlarmStatus,
+     trapNetworkElemAdminState,
+     trapNetworkElemAvailStatus,
+     trapText,
+     trapNETrapLastTrapTimeStamp,
+     trapChangedObjectId,
+     trapAdditionalInfoInteger1,
+     trapAdditionalInfoInteger2,
+     trapAdditionalInfoInteger3,
+     numberOfTrapReceivers,
+     trapReceiverAddr,
+     bncEnableTraps
+    }
+    STATUS current
+    DESCRIPTION "conformance"
+   ::= { arrisMuxBncConformance 7 }
+
+   traps NOTIFICATION-GROUP
+    NOTIFICATIONS {
+     trapSiteError,
+     trapBncSysError
+    }
+    STATUS current
+    DESCRIPTION "conformance"
+   ::= { arrisMuxBncConformance 8 }
+
+   mib2Conformance OBJECT-GROUP
+    OBJECTS {
+     sysDescr,
+     sysObjectID,
+     sysUpTime,
+     sysContact,
+     sysName,
+     sysLocation,
+     sysServices
+    }
+    STATUS current
+    DESCRIPTION "conformance"
+   ::= { arrisMuxBncConformance 9 }
+
+   bcsIdentConformance OBJECT-GROUP
+    OBJECTS {
+     identSerialNumber,
+     identChassisNumber,
+     identIfIndex,
+     identHardwareVersion,
+     identHardwareFeatures,
+     identInventoryCode,
+     identSoftwareVersion,
+     identLocationArea,
+     identLocationRack,
+     identLocationShelf,
+     identMIBVersion,
+     identAgentVersion,
+     identCommand,
+     identUnitModel
+    }
+    STATUS current
+    DESCRIPTION "conformance"
+   ::= { arrisMuxBncConformance 10 }
+
+-- MIB Tree
+-- The following is for descriptive purposes only.
+-- mgmt (internet mgmt)
+--   +..mib-2
+--      +..system
+-- private (internet private)
+--   +..enterprises
+--      +..gi
+--         +..giproducts
+--            +..arrisMuxBNC{aka bnc}
+--               +..bncSystem
+--               +..bncEnableTraps
+--               +..bncSysTraps
+--         +..bcs
+--            +..bcsIdent
+--            +..modSysTraps
+--               +..modSysTrapElements
+--               +..modSysTrapControl
+--
+-- =============================================================================
+-- bncSystem
+-- =============================================================================
+
+-- MIB Tree
+-- The following is for descriptive purposes only.
+-- bncSystem
+--   +..bncIdNumber
+--   +..bncPlatformHealthStatus
+--   +..bncPlatformHealthStatusLastChange
+--   +..bncGroupTable
+--      +..bncGroupEntry
+--         +..bncGroupIndex
+--         +..bncGroupName
+--         +..bncGroupHealthStatus
+--         +..bncGroupHealthStatusLastChange
+--   +..bncElementTable
+--      +..bncElementEntry
+--         +..bncGroupIndexE
+--         +..bncElementIndex
+--         +..bncElementName
+--         +..bncElementIpAddress
+--         +..bncElementType
+--         +..bncElementRedundancyGroupID
+--         +..bncElementRedundancyGroupName
+--         +..bncElementRedundancyRole
+--         +..bncElementRedundancyOpState
+--         +..bncElementRequestedOpState
+--         +..bncElementActualOpState
+--         +..bncElementHealthStatus
+--         +..bncElementHealthStatusLastChange
+--   +..bncDatabase
+--      +..bncDatabaseConnections
+--      +..bncDatabaseImageSize
+--      +..bncDatabaseLastBackup
+--      +..bncDatabaseNextBackup
+--   +..bncServiceTable
+--      +..bncServiceEntry
+--         +..bncGroupIndexS
+--         +..bncServiceIndex
+--         +..bncServiceName
+--         +..bncServiceEncryptionMode
+--         +..bncServicePLADEncryptionMode
+--   +..bncProgramTable
+--      +..bncProgramEntry
+--         +..bncGroupIndexP
+--         +..bncServiceIndexP
+--         +..bncProgramIndex
+--         +..bncProgramName
+--         +..bncProgramStartTime
+--         +..bncProgramEndTime
+--         +..bncProgramCatvTier1
+--         +..bncProgramCatvTier2
+--         +..bncProgramCatvTier3
+--         +..bncProgramCatvTier4
+--         +..bncProgramCatvTier5
+--         +..bncProgramCatvTier6
+--         +..bncProgramCatvTier7
+--         +..bncProgramCatvTier8
+--         +..bncProgramDbsTier1
+--         +..bncProgramDbsTier2
+--         +..bncProgramDbsTier3
+--         +..bncProgramDbsTier4
+--         +..bncProgramDbsTier5
+--         +..bncProgramDbsTier6
+--         +..bncProgramDbsTier7
+--         +..bncProgramDbsTier8
+
+   bncIdNumber OBJECT-TYPE
+     SYNTAX      INTEGER
+     MAX-ACCESS  read-only
+     STATUS      current
+     DESCRIPTION "This is the BNC ID number allocated to the BNC by the license
+      key.  For an unlicensed BNC application (e.g.; BNC Lite), the agent shall
+      return a value of 1." 
+     ::= { bncSystem 1 }
+
+   bncPlatformHealthStatus OBJECT-TYPE
+     SYNTAX      INTEGER { ok(0), unknown(1), warning(2), error(3), fatal(4) }
+     MAX-ACCESS  read-only
+     STATUS      current
+     DESCRIPTION "The health of the hardware platform on which the BNC server is
+      running as reported by the BNC platform status monitoring functionality.
+      The reported value is that of the highest severity alarm status.
+      Alternative mappings include Healthy->ok(0), NonCritical->warning(2) and
+      Critical->fatal(4)."
+     ::= { bncSystem 2 }
+
+   bncPlatformHealthStatusLastChange OBJECT-TYPE
+     SYNTAX      DateAndTime
+     MAX-ACCESS  read-only
+     STATUS      current
+     DESCRIPTION "The timestamp of when the platform health status last 
+      changed."
+     ::= { bncSystem 3 }
+
+   BncGroupEntry ::= SEQUENCE {
+     bncGroupIndex                  INTEGER,
+     bncGroupName                   DisplayString,
+     bncGroupHealthStatus           INTEGER,
+     bncGroupHealthStatusLastChange DateAndTime }
+
+   bncGroupTable OBJECT-TYPE
+     SYNTAX      SEQUENCE OF BncGroupEntry
+     MAX-ACCESS  not-accessible
+     STATUS      current
+     DESCRIPTION "A table of the network element groups under the control of the
+      BNC."
+     ::= { bncSystem 51 }
+
+   bncGroupEntry OBJECT-TYPE
+     SYNTAX      BncGroupEntry
+     MAX-ACCESS  not-accessible
+     STATUS      current
+     DESCRIPTION "A row in bncGroupTable."
+     INDEX { bncGroupIndex } 
+     ::= { bncGroupTable 1 }
+
+   bncGroupIndex OBJECT-TYPE
+     SYNTAX      INTEGER(1..2147483647)
+     MAX-ACCESS  not-accessible
+     STATUS      current
+     DESCRIPTION "The network element group ID, which is used as an index into
+      the table of network element groups under control of the BNC. The network
+      element group ID is automatically assigned during group creation. A BNC
+      server can control more than one network element group."
+     ::= { bncGroupEntry 2 }
+
+   bncGroupName OBJECT-TYPE
+     SYNTAX      DisplayString
+     MAX-ACCESS  read-only
+     STATUS      current
+     DESCRIPTION "The unique user-assigned name for the network element group."
+     ::= { bncGroupEntry 3 }
+
+   bncGroupHealthStatus OBJECT-TYPE
+     SYNTAX      INTEGER { ok(0), unknown(1), warning(2), error(3), fatal(4) }
+     MAX-ACCESS  read-only
+     STATUS      current
+     DESCRIPTION "Status of this network element group.  At startup, this 
+      bncGroupHealthStatus defaults to 'unknown' (1). The bncGroupHealthStatus
+      reflects the highest health status value of all network elements within
+      the network element group."
+     ::= { bncGroupEntry 4 }
+
+   bncGroupHealthStatusLastChange OBJECT-TYPE
+     SYNTAX      DateAndTime
+     MAX-ACCESS  read-only
+     STATUS      current
+     DESCRIPTION "Time the last modification was made to this BNC network
+      element group."
+     ::= { bncGroupEntry 5 }
+
+   bncElementTable OBJECT-TYPE
+     SYNTAX      SEQUENCE OF BncElementEntry
+     MAX-ACCESS  not-accessible
+     STATUS      current
+     DESCRIPTION "A table of the network elements under control of the BNC."
+     ::= { bncSystem 52 }
+
+   bncElementEntry OBJECT-TYPE
+     SYNTAX      BncElementEntry
+     MAX-ACCESS	 not-accessible
+     STATUS      current
+     DESCRIPTION "A row in BncElementTable."
+     INDEX       { bncGroupIndexE, bncElementIndex } 
+     ::=  { bncElementTable 1 }
+
+   BncElementEntry ::= SEQUENCE {
+     bncGroupIndexE                   INTEGER,
+     bncElementIndex                  INTEGER,
+     bncElementName                   DisplayString,
+     bncElementIpAddress              IpAddress,
+     bncElementType                   INTEGER,
+     bncElementRedundancyGroupID      INTEGER,
+     bncElementRedundancyGroupName    DisplayString,
+     bncElementRedundancyRole         INTEGER,
+     bncElementRequestedOpState       INTEGER,
+     bncElementActualOpState          INTEGER,
+     bncElementHealthStatus           INTEGER,
+     bncElementHealthStatusLastChange DateAndTime,
+     bncElementPositionID             DisplayString }
+
+   bncGroupIndexE OBJECT-TYPE
+     SYNTAX      INTEGER(1..2147483647)
+     MAX-ACCESS  not-accessible
+     STATUS      current
+     DESCRIPTION "Value of bncGroupIndex associated with the network element."
+     ::= { bncElementEntry 2 }
+
+   bncElementIndex OBJECT-TYPE
+     SYNTAX      INTEGER(1..2147483647)
+     MAX-ACCESS  not-accessible
+     STATUS      current
+     DESCRIPTION "The network element ID number which is an index into the
+      table of network elements under the control of the BNC. The network
+      element ID number is automatically assigned during network element
+      creation."
+     ::= { bncElementEntry 3 }
+
+   bncElementName OBJECT-TYPE
+     SYNTAX       DisplayString
+     MAX-ACCESS   read-only
+     STATUS       current
+     DESCRIPTION "Unique user-assigned name for the network element."
+     ::= { bncElementEntry 4 }
+
+   bncElementIpAddress OBJECT-TYPE
+     SYNTAX       IpAddress
+     MAX-ACCESS   read-only
+     STATUS       current
+     DESCRIPTION "The IP address of the network element."
+     ::= { bncElementEntry 5 }
+
+   bncElementType OBJECT-TYPE
+     SYNTAX      INTEGER { se1010(0), se2000(1), tmx(2), dataServer(3),
+                           adServer(4),sem(5), opRouter(6), ipRouter(7),
+                           se4010(8), se4100(9), se5010(10), se5100(11),
+                           modulator(12), se3000(13), se6000-6601 (14),
+                           sencoreModulator(15), rE-FPM(16), fPM(17), dEM(18),
+                           nTPserver(19), networkSwitch(20), inputSource(21),
+                           me7000(22), se7100(23), newtec-m6100(24),
+                           newtec-uss0202(25), tme2020(26) }
+     MAX-ACCESS  read-only
+     STATUS      current
+     DESCRIPTION "Type of network element."
+     ::= { bncElementEntry 6 }
+
+   bncElementRedundancyGroupID OBJECT-TYPE
+     SYNTAX      INTEGER
+     MAX-ACCESS  read-only
+     STATUS      current
+     DESCRIPTION "The ID of the redundancy group that this network element
+      belongs to. A value of (-1) indicates that the network element has not
+      been placed in a redundant configuration."
+     ::= { bncElementEntry 7 }
+
+   bncElementRedundancyGroupName OBJECT-TYPE
+     SYNTAX      DisplayString
+     MAX-ACCESS  read-only
+     STATUS      current
+     DESCRIPTION "The name of the redundancy group that this network element
+      belongs to. If the network element has not been placed into a redundant
+      configuration, an empty(zero-length) string is returned for this object."
+     ::= { bncElementEntry 8 }
+
+   bncElementRedundancyRole OBJECT-TYPE
+     SYNTAX      INTEGER { standAlone(0), primary(1), backup(2) }
+     MAX-ACCESS  read-only
+     STATUS      current
+     DESCRIPTION "Redundancy role of the network element within system. If the
+      network element has not been placed into a redundant configuration, the
+      value standAlone is returned.
+      standAlone  - no redundancy switching is provided for this network
+       element.
+      primary	- a redundant network element that is normally providing service.
+      backup - a redundant network element that is switched into service in the
+       event of a failure of a primary network element."
+     ::= { bncElementEntry 9 }
+
+   bncElementRequestedOpState OBJECT-TYPE	
+     SYNTAX      INTEGER { online(0), offLine(1) }
+     MAX-ACCESS  read-only
+     STATUS      current
+     DESCRIPTION "The expected operational state of a network element is
+      represented by this object. Return online if network element is not a
+      member of a redundancy group."
+     ::= { bncElementEntry 10 }
+
+   bncElementActualOpState OBJECT-TYPE	
+     SYNTAX      INTEGER { active(0), standby(1), offLine(2) }
+     MAX-ACCESS  read-only
+     STATUS      current
+     DESCRIPTION "The operational state of this network element as reported by
+      the network element's redundancy controller. The actual operational state
+      may differ from the expected operational state if the network element has
+      faulted or cannot provide expected service.
+      active  - providing service
+      standby - not providing service, but able to provide service
+      offLine - not providing service and/or unable to provide service."
+     ::= { bncElementEntry 11 }
+
+   bncElementHealthStatus OBJECT-TYPE
+     SYNTAX      INTEGER { ok(0), unknown(1), warning(2), error(3), fatal(4) }
+     MAX-ACCESS  read-only
+     STATUS      current
+     DESCRIPTION "Status of this network element.  At startup, this alarm status
+      defaults to 'unknown' (1)."
+     ::= { bncElementEntry 12 }
+
+   bncElementHealthStatusLastChange OBJECT-TYPE
+     SYNTAX      DateAndTime
+     MAX-ACCESS  read-only
+     STATUS      current
+     DESCRIPTION "Time of the last change in the health status of the network
+      element."
+     ::= { bncElementEntry 13 }
+
+   bncElementPositionID OBJECT-TYPE
+     SYNTAX      DisplayString
+     MAX-ACCESS  read-only
+     STATUS      current
+     DESCRIPTION "A network element identifier that is unique within a single
+      BNC system and that can be used to identify similar network elements
+      when doing A:B comparison of two BNC system configurations."
+     ::= { bncElementEntry 14 }
+
+   bncDatabase OBJECT IDENTIFIER ::= { bncSystem 53 }
+
+   bncDatabaseConnections OBJECT-TYPE
+     SYNTAX      Gauge32
+     MAX-ACCESS  read-only
+     STATUS      current
+     DESCRIPTION "The current number of database connections."
+   ::= { bncDatabase 1 }
+
+   bncDatabaseImageSize OBJECT-TYPE
+     SYNTAX      Integer32
+     MAX-ACCESS  read-only
+     STATUS      current
+     DESCRIPTION "The database image size in kilobytes."
+     ::= { bncDatabase 2 }
+
+   bncDatabaseLastBackup OBJECT-TYPE
+     SYNTAX      DateAndTime
+     MAX-ACCESS  read-only
+     STATUS      current
+     DESCRIPTION "The time of the last database backup."
+     ::= { bncDatabase 3 }
+
+   bncDatabaseNextBackup OBJECT-TYPE
+     SYNTAX      DateAndTime
+     MAX-ACCESS  read-only
+     STATUS      current
+     DESCRIPTION "The time of the next scheduled backup."
+     ::= { bncDatabase 4 }
+
+   bncServiceTable OBJECT-TYPE
+     SYNTAX      SEQUENCE OF BncServiceEntry
+     MAX-ACCESS  not-accessible
+     STATUS      current
+     DESCRIPTION "A table of the DCII services in an output multiplex generated
+      by the equipment under the control of the BNC."
+     ::= { bncSystem 55 }
+
+   bncServiceEntry OBJECT-TYPE
+     SYNTAX      BncServiceEntry
+     MAX-ACCESS  not-accessible
+     STATUS      current
+     DESCRIPTION "A row in BncServiceTable."
+     INDEX       { bncGroupIndexS, bncServiceIndex } 
+     ::= { bncServiceTable 1 }
+
+   BncServiceEntry ::= SEQUENCE {
+     bncGroupIndexS               INTEGER,
+     bncServiceIndex              INTEGER,
+     bncServiceName               DisplayString,
+     bncServiceEncryptionMode     INTEGER,
+     bncServicePLADEncryptionMode INTEGER }
+     
+   bncGroupIndexS OBJECT-TYPE
+     SYNTAX      INTEGER(1..2147483647)
+     MAX-ACCESS  not-accessible
+     STATUS      current
+     DESCRIPTION "Value of bncGroupIndex associated with the service."
+     ::= { bncServiceEntry 2 }
+
+   bncServiceIndex OBJECT-TYPE
+     SYNTAX      INTEGER(1..2147483647)
+     MAX-ACCESS  not-accessible
+     STATUS      current
+     DESCRIPTION "The MPEG program number of the service, which is an index into
+      the table of DCII services."
+     ::= { bncServiceEntry 3 }
+
+   bncServiceName OBJECT-TYPE
+     SYNTAX      DisplayString
+     MAX-ACCESS  read-only
+     STATUS      current
+     DESCRIPTION "The name assigned to the DCII service."
+     ::= { bncServiceEntry 4 }
+
+   bncServiceEncryptionMode OBJECT-TYPE
+     SYNTAX      INTEGER { clear(1), unencrypted(2), fixedkey(3),
+                           fullencryption(4) }
+     MAX-ACCESS  read-only
+     STATUS      current
+     DESCRIPTION "The current encryption mode of the DCII service."
+     ::= { bncServiceEntry 5 }
+
+   bncServicePLADEncryptionMode OBJECT-TYPE
+     SYNTAX      INTEGER { clear(1), unencrypted(2), fixedkey(3),
+                           fullencryption(4) }
+     MAX-ACCESS  read-only
+     STATUS      current
+     DESCRIPTION "The current PLAD encryption mode of the service."
+     ::= { bncServiceEntry 6 }
+
+   bncProgramTable 		OBJECT-TYPE
+     SYNTAX      SEQUENCE OF BncProgramEntry
+     MAX-ACCESS  not-accessible
+     STATUS      current
+     DESCRIPTION "A table of the DCII programs in a output multiplex generated
+      by the equipment under the control of the BNC."
+     ::= { bncSystem 56 }
+
+   bncProgramEntry OBJECT-TYPE
+     SYNTAX      BncProgramEntry
+     MAX-ACCESS  not-accessible
+     STATUS      current
+     DESCRIPTION "A row in the BncProgramTable."
+     INDEX       { bncGroupIndexP, bncServiceIndexP, bncProgramIndex } 
+     ::= { bncProgramTable 1 }
+
+   BncProgramEntry ::= SEQUENCE {
+     bncGroupIndexP      INTEGER,
+     bncServiceIndexP    INTEGER,
+     bncProgramIndex     INTEGER,
+     bncProgramName      DisplayString,
+     bncProgramStartTime DateAndTime,
+     bncProgramEndTime   DateAndTime,
+     bncProgramCatvTier1 INTEGER,
+     bncProgramCatvTier2 INTEGER,
+     bncProgramCatvTier3 INTEGER,
+     bncProgramCatvTier4 INTEGER,
+     bncProgramCatvTier5 INTEGER,
+     bncProgramCatvTier6 INTEGER,
+     bncProgramCatvTier7 INTEGER,
+     bncProgramCatvTier8 INTEGER,
+     bncProgramDbsTier1  INTEGER,
+     bncProgramDbsTier2  INTEGER,
+     bncProgramDbsTier3  INTEGER,
+     bncProgramDbsTier4  INTEGER,
+     bncProgramDbsTier5  INTEGER,
+     bncProgramDbsTier6  INTEGER,
+     bncProgramDbsTier7  INTEGER,
+     bncProgramDbsTier8  INTEGER }
+
+   bncGroupIndexP OBJECT-TYPE
+     SYNTAX      INTEGER(1..2147483647)
+     MAX-ACCESS  not-accessible
+     STATUS      current
+     DESCRIPTION "Value of bncGroupIndex associated with the program."
+     ::= { bncProgramEntry 2 }
+
+   bncServiceIndexP OBJECT-TYPE
+     SYNTAX      INTEGER(1..2147483647)
+     MAX-ACCESS  not-accessible
+     STATUS      current
+     DESCRIPTION "Value of bncServiceIndex associated with the program."
+     ::= { bncProgramEntry 3 }
+
+   bncProgramIndex OBJECT-TYPE
+     SYNTAX      INTEGER(1..2147483647)
+     MAX-ACCESS  not-accessible
+     STATUS      current
+     DESCRIPTION "The BNC shall use the programs start time, in seconds since
+      January 6th 1980, as the index value for each bncProgramIndex"
+     ::= { bncProgramEntry 4 }
+
+    bncProgramName 	OBJECT-TYPE
+     SYNTAX      DisplayString
+     MAX-ACCESS  read-only
+     STATUS      current
+     DESCRIPTION "The name assigned to the DCII program."
+     ::= { bncProgramEntry 5 }
+
+   bncProgramStartTime 	OBJECT-TYPE
+     SYNTAX      DateAndTime
+     MAX-ACCESS  read-only
+     STATUS      current
+     DESCRIPTION "The start time of the DCII program epoch."
+     ::= { bncProgramEntry 6 }
+
+   bncProgramEndTime 	OBJECT-TYPE
+     SYNTAX      DateAndTime
+     MAX-ACCESS  read-only
+     STATUS      current
+     DESCRIPTION "The end time of the DCII program epoch."
+     ::= { bncProgramEntry 7 }
+
+   bncProgramCatvTier1 OBJECT-TYPE
+     SYNTAX      INTEGER (-1..2048)
+     MAX-ACCESS  read-only
+     STATUS      current
+     DESCRIPTION "A CATV tier in the range of 0 to 2048. A value of -1
+      signifies that the tier has not been assigned."
+     ::= { bncProgramEntry 8 }
+
+   bncProgramCatvTier2 OBJECT-TYPE
+     SYNTAX      INTEGER (-1..2048)
+     MAX-ACCESS  read-only
+     STATUS      current
+     DESCRIPTION "A CATV tier in the range of 0 to 2048. A value of -1
+      signifies that the tier has not been assigned."
+     ::= { bncProgramEntry 9 }
+
+   bncProgramCatvTier3 OBJECT-TYPE
+     SYNTAX      INTEGER (-1..2048)
+     MAX-ACCESS  read-only
+     STATUS      current
+     DESCRIPTION "A CATV tier in the range of 0 to 2048. A value of -1
+      signifies that the tier has not been assigned."
+     ::= { bncProgramEntry 10 }
+
+   bncProgramCatvTier4 OBJECT-TYPE
+     SYNTAX      INTEGER (-1..2048)
+     MAX-ACCESS  read-only
+     STATUS      current
+     DESCRIPTION "A CATV tier in the range of 0 to 2048. A value of -1
+      signifies that the tier has not been assigned."
+     ::= { bncProgramEntry 11 }
+
+   bncProgramCatvTier5 OBJECT-TYPE
+     SYNTAX      INTEGER (-1..2048)
+     MAX-ACCESS  read-only
+     STATUS      current
+     DESCRIPTION "A CATV tier in the range of 0 to 2048. A value of -1
+      signifies that the tier has not been assigned."
+    ::= { bncProgramEntry 12 }
+
+   bncProgramCatvTier6 OBJECT-TYPE
+     SYNTAX      INTEGER (-1..2048)
+     MAX-ACCESS  read-only
+     STATUS      current
+     DESCRIPTION "A CATV tier in the range of 0 to 2048. A value of -1
+      signifies that the tier has not been assigned."
+     ::= { bncProgramEntry 13 }
+
+   bncProgramCatvTier7 OBJECT-TYPE
+     SYNTAX      INTEGER (-1..2048)
+     MAX-ACCESS  read-only
+     STATUS      current
+     DESCRIPTION "A CATV tier in the range of 0 to 2048. A value of -1
+      signifies that the tier has not been assigned."
+     ::= { bncProgramEntry 14 }
+
+   bncProgramCatvTier8 OBJECT-TYPE
+     SYNTAX      INTEGER (-1..2048)
+     MAX-ACCESS  read-only
+     STATUS      current
+     DESCRIPTION "A CATV tier in the range of 0 to 2048. A value of -1
+      signifies that the tier has not been assigned."
+     ::= { bncProgramEntry 15 }
+
+   bncProgramDbsTier1 OBJECT-TYPE
+     SYNTAX      INTEGER (-1..16777215)
+     MAX-ACCESS  read-only
+     STATUS      current
+     DESCRIPTION "A DBS tier in the range of 0 to 16777215. A value of -1
+      signifies that the tier has not been assigned."
+     ::= { bncProgramEntry 16 }
+
+   bncProgramDbsTier2 OBJECT-TYPE
+     SYNTAX      INTEGER (-1..16777215)
+     MAX-ACCESS  read-only
+     STATUS      current
+     DESCRIPTION "A DBS tier in the range of 0 to 16777215. A value of -1
+      signifies that the tier has not been assigned."
+     ::= { bncProgramEntry 17 }
+
+   bncProgramDbsTier3 OBJECT-TYPE
+     SYNTAX      INTEGER (-1..16777215)
+     MAX-ACCESS  read-only
+     STATUS      current
+     DESCRIPTION "A DBS tier in the range of 0 to 16777215. A value of -1
+      signifies that the tier has not been assigned."
+     ::= { bncProgramEntry 18 }
+
+   bncProgramDbsTier4 OBJECT-TYPE
+     SYNTAX      INTEGER (-1..16777215)
+     MAX-ACCESS  read-only
+     STATUS      current
+     DESCRIPTION "A DBS tier in the range of 0 to 16777215. A value of -1
+      signifies that the tier has not been assigned."
+     ::= { bncProgramEntry 19 }
+
+   bncProgramDbsTier5 OBJECT-TYPE
+     SYNTAX      INTEGER (-1..16777215)
+     MAX-ACCESS  read-only
+     STATUS      current
+     DESCRIPTION "A DBS tier in the range of 0 to 16777215. A value of -1
+      signifies that the tier has not been assigned."
+     ::= { bncProgramEntry 20 }
+
+   bncProgramDbsTier6 OBJECT-TYPE
+     SYNTAX      INTEGER (-1..16777215)
+     MAX-ACCESS  read-only
+     STATUS     current
+     DESCRIPTION "A DBS tier in the range of 0 to 16777215. A value of -1
+      signifies that the tier has not been assigned."
+     ::= { bncProgramEntry 21 }
+
+   bncProgramDbsTier7 OBJECT-TYPE
+     SYNTAX      INTEGER (-1..16777215)
+     MAX-ACCESS  read-only
+     STATUS      current
+     DESCRIPTION "A DBS tier in the range of 0 to 16777215. A value of -1
+      signifies that the tier has not been assigned."
+     ::= { bncProgramEntry 22 }
+
+   bncProgramDbsTier8 OBJECT-TYPE
+     SYNTAX      INTEGER (-1..16777215)
+     MAX-ACCESS  read-only
+     STATUS      current
+     DESCRIPTION "A DBS tier in the range of 0 to 16777215. A value of -1
+      signifies that the tier has not been assigned."
+     ::= { bncProgramEntry 23 }
+
+-- =============================================================================
+-- MOD-SYS-TRAPS
+-- Only those objects supported by the Mux BNC are defined.
+-- =============================================================================
+--  MIB Tree
+--  The following diagram listing the attributes in this MIB is for descriptive
+--  purposes only.
+--
+--  bcs ( OID = 1.3.6.1.4.1.1166.7 )
+--    +..modSysTraps(3)
+--       +..modSysTrapElements(1)
+--          ALL OF THESE 12 ELEMENTS ARE MANDATORY.
+--          +..trapIdentifier(1)
+--          +..trapSequenceId(2)
+--          +..trapNetworkElemModelNumber(3) 
+--          +..trapNetworkElemSerialNum(4)  
+--          +..trapPerceivedSeverity(5)  
+--          +..trapNetworkElemOperState(6) 
+--          +..trapNetworkElemAlarmStatus(7)  
+--          +..trapNetworkElemAdminState(8)  
+--          +..trapNetworkElemAvailStatus(9)    
+--          +..trapText(10) 
+--          +..trapNELastTrapTimeStamp(11)
+--          +..trapChangedObjectId(12)
+--          THESE TRAP ELEMENTS ARE OPTIONAL
+--          +..trapAdditionalInfoInteger1(13)       
+--          +..trapAdditionalInfoInteger2(14)       
+--          +..trapAdditionalInfoInteger3(15)       
+--       +..modSysTrapControl(2)
+--          +..numberOftrapReceivers(1) 
+--          +..trapReceiversTable(2)
+--             +..trapReceiversEntry(1)
+--                +..trapReceiversTableIndex(1)
+--                +..trapReceiverAddr(2)
+--                +..trapReceiverCommunityString(3)
+
+--
+--
+--  The Trap Elements Group.
+--
+--  This group contains those objects which are specifically related
+--  to trap and alarm processing by SNMP agents and proxies.
+--  All standard SNMP traps defined for the differnt standard SNMP MIBs
+--  are always supported. The traps defined here are product specific
+--  and represent only the common portion of the trap PDU.
+--
+--  Trap processing within the agents is controlled by modSysTrapControl
+--  group.   This group includes the definitions of Discriminators 
+--  (Trap Filters).
+--
+--   Within each network agent, there is a mechanism to 
+--   throttle the issuance of traps to the network manager.  
+--   The principles governing the throttling of traps are 
+--   as follows:
+--     (1) Traps should be sent to the manager no faster than 
+--       a pre-determined rate.  This rate is contained in this 
+--       SNMP object  - TrapThrottlingRate 
+--       that can be set by the network manager.  A 
+--       default value of one trap per second is recommended.
+--     (2) The SNMP agent can receive a burst of traps which 
+--       need to be sent to the network manager.  The SNMP 
+--       agent shall have a buffer in which traps can be 
+--       queued for sending to the manager.  The traps should 
+--       be kept in sequence by the time at which the traps 
+--       were received.  An initial buffer limit of 50 traps 
+--       is recommended.  This size may require adjustment 
+--       based on the type of network element, and the types 
+--       of events that can occur.  Max Value is 300 traps.
+--    (3) When the SNMP agent receives a request to send a trap, 
+--       it checks whether the trap is to be forwarded to the
+--       network manager by checking applicable Disriminators, 
+--       If the trap is to be forwared and the trap buffer is full,
+--       a trap message must be discarded.  
+--
+-- *******************************************************************
+
+   trapIdentifier OBJECT-TYPE
+     SYNTAX      INTEGER (1..2147483647)
+     MAX-ACCESS  read-only
+     STATUS      current
+     DESCRIPTION "This object identifies the specific notification issued by the
+      network element."
+     DEFVAL      { 2147483647 }    
+     ::= { modSysTrapElements 1 }
+
+   trapSequenceId OBJECT-TYPE
+     SYNTAX      INTEGER (1..2147483647)
+     MAX-ACCESS  read-only
+     STATUS      current
+     DESCRIPTION "This object identifies the specific notification issued by the
+      network element."
+     ::= { modSysTrapElements 2 }
+     
+   trapNetworkElemModelNumber OBJECT-TYPE
+     SYNTAX      DisplayString
+     MAX-ACCESS  read-only
+     STATUS      current
+     DESCRIPTION "The unit shall use the text 'Mux BNC' as the value."
+     ::= { modSysTrapElements 3}
+
+   trapNetworkElemSerialNum OBJECT-TYPE
+     SYNTAX      DisplayString
+     MAX-ACCESS  read-only
+     STATUS      current
+     DESCRIPTION "The unit shall use the MAC address of its primary Ethernet
+      interface."
+     ::= { modSysTrapElements 4}
+
+   trapPerceivedSeverity OBJECT-TYPE
+     SYNTAX      INTEGER { cleared(1), indeterminate(2), warning(3), minor(4),
+                           major(5), critical(6) }
+     MAX-ACCESS  read-only
+     STATUS      current
+     DESCRIPTION "This parameter defines five severity levels, which provide 
+      an indication of how it is perceived that the capability 
+      of the managed object has been affected. The other level
+      is not a severity level, but indicates that an alarm has been
+      cleared, and thus is no longer in alarm state.  Note that this 
+      field has no meaning for configuration change traps."
+     ::= { modSysTrapElements 5 }
+
+   trapNetworkElemOperState OBJECT-TYPE
+     SYNTAX      INTEGER { enabled(1), disabled(2) }
+     MAX-ACCESS  read-only
+     STATUS      current
+     DESCRIPTION "The unit shall return its currently defined Operational
+      State."
+     ::= { modSysTrapElements 6 }
+
+   trapNetworkElemAlarmStatus OBJECT-TYPE
+     SYNTAX      INTEGER { idle(1), indeterminate(2), warning(3), minor(4),
+                           major(5), critical(6) }
+     MAX-ACCESS  read-only
+     STATUS      current
+     DESCRIPTION "The unit shall return the alarm status corresponding to the
+      highest alarm status reported for all alarms currently asserted by the
+      unit."
+     ::= { modSysTrapElements 7 }
+  
+   trapNetworkElemAdminState OBJECT-TYPE
+     SYNTAX      INTEGER { locked(1), unlocked(2), shuttingDown(3) }
+     MAX-ACCESS  read-only
+     STATUS      current
+     DESCRIPTION "The unit shall return the value corresponding to its current
+      Administrative State."
+     ::= { modSysTrapElements 8 }
+
+   trapNetworkElemAvailStatus OBJECT-TYPE
+     SYNTAX      INTEGER { inTest(1), failed(2), powerOff(3), offLine(4),
+                           offDuty(5), dependency(6), degraded(7),
+                           notInstalled(8), logFull(9), available(10) }
+     MAX-ACCESS  read-only
+     STATUS      current
+     DESCRIPTION "The unit shall return the value corresponding to its current
+      Availability Status."
+     ::= {modSysTrapElements 9 }
+
+   trapText OBJECT-TYPE
+     SYNTAX      DisplayString
+     MAX-ACCESS  read-only
+     STATUS      current
+     DESCRIPTION "The unit may return supplemental textual information with
+      the trap.  The unit shall return a zero length string if no supplemental
+      text is needed."
+     ::= { modSysTrapElements 10 }
+
+   trapNETrapLastTrapTimeStamp OBJECT-TYPE
+     SYNTAX      TimeTicks
+     MAX-ACCESS  read-only
+     STATUS      current
+     DESCRIPTION "The unit shall return the SNMP agent's sysUpTime value
+      corresponding to when the trap was generated or zero if a timestamp value
+      is not available."
+     ::= { modSysTrapElements 11 }
+
+   trapChangedObjectId OBJECT-TYPE
+     SYNTAX      DisplayString
+     MAX-ACCESS  read-only
+     STATUS      current
+     DESCRIPTION "This  variable identifies the object that has generated the
+      trap.  The format of the textual information depends on the object."
+     ::= { modSysTrapElements 12 }
+
+-- *************************************************************************************
+-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+-- *************************************************************************************
+--             The above Trap Elements HAVE to be included in every trap !
+--   The following trap elements are included in trap pdu if appropriate.
+-- *************************************************************************************
+-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+-- *************************************************************************************
+
+   trapAdditionalInfoInteger1 OBJECT-TYPE
+     SYNTAX      INTEGER (1..2147483647)
+     MAX-ACCESS  read-only
+     STATUS      current
+     DESCRIPTION "This 32 bit integer is used to hold specific information about 
+      the trap."
+     DEFVAL      { 2147483647 }     
+     ::= { modSysTrapElements 13 }
+
+   trapAdditionalInfoInteger2 OBJECT-TYPE
+     SYNTAX      INTEGER (1..2147483647)
+     MAX-ACCESS  read-only
+     STATUS      current
+     DESCRIPTION "This 32 bit integer is used to hold specific information about 
+      the trap.           "
+     DEFVAL      { 2147483647 }       
+     ::= { modSysTrapElements 14 }
+
+   trapAdditionalInfoInteger3 OBJECT-TYPE
+     SYNTAX      INTEGER (1..2147483647)
+     MAX-ACCESS  read-only
+     STATUS      current
+     DESCRIPTION "This 32 bit integer is used to hold specific information about 
+      the trap.            "
+     DEFVAL      { 2147483647 }       
+     ::= { modSysTrapElements 15 }
+
+--
+-- modSysTrapControl group
+--
+
+   numberOfTrapReceivers OBJECT-TYPE
+     SYNTAX      INTEGER (1..4)
+     MAX-ACCESS  read-only
+     STATUS      current
+     DESCRIPTION "The unit returns the number of trap receivers currently
+      defined in the trapReceiversTable."
+     ::= { modSysTrapControl 1 }
+
+   trapReceiversTable OBJECT-TYPE
+     SYNTAX      SEQUENCE OF TrapReceiversEntry
+     MAX-ACCESS  not-accessible
+     STATUS      current
+     DESCRIPTION "A list of managers to send traps to.  The current number of
+       entries is given by the value of numberOfTrapReceivers."
+     ::= { modSysTrapControl 2 }
+
+   trapReceiversEntry OBJECT-TYPE
+     SYNTAX      TrapReceiversEntry
+     MAX-ACCESS  not-accessible
+     STATUS      current
+     DESCRIPTION "The list of managers to send traps."
+     INDEX       {trapReceiversTableIndex}
+     ::= { trapReceiversTable 1 }
+
+   TrapReceiversEntry ::= SEQUENCE {
+     trapReceiversTableIndex          INTEGER,
+     trapReceiverAddr                 IpAddress }
+
+   trapReceiversTableIndex OBJECT-TYPE
+     SYNTAX      INTEGER(1..4)
+     MAX-ACCESS  not-accessible
+     STATUS      current
+     DESCRIPTION "The index to a trap receiver entry."
+     ::= { trapReceiversEntry 1 }
+
+   trapReceiverAddr OBJECT-TYPE
+     SYNTAX      IpAddress
+     MAX-ACCESS  read-write
+     STATUS      current
+     DESCRIPTION "The unit shall return the IP address of a manager to which it
+      will transmit traps."
+     ::= { trapReceiversEntry 2 }
+
+-- =============================================================================
+-- bncSysTraps
+-- =============================================================================
+
+-- MIB Tree
+-- The following is for descriptive purposes only.
+-- bncSysTraps
+--   +..trapSiteError
+--   +..trapBncSysError
+
+   trapSiteError NOTIFICATION-TYPE
+     OBJECTS   { trapIdentifier,
+                 trapSequenceId,
+                 trapNetworkElemModelNumber,
+                 trapNetworkElemSerialNum,
+                 trapPerceivedSeverity,
+                 trapNetworkElemOperState,
+                 trapNetworkElemAlarmStatus,
+                 trapNetworkElemAdminState,
+                 trapNetworkElemAvailStatus,
+                 trapText,
+                 trapNETrapLastTrapTimeStamp,
+                 trapChangedObjectId,
+                 trapAdditionalInfoInteger1,
+                 trapAdditionalInfoInteger2,
+                 trapAdditionalInfoInteger3 }
+     STATUS      current
+     DESCRIPTION "This trap is issued if an error is detected for a site, group,
+      or network element within the management domain of the BNC.
+      trapText - 'BNC Site/Group/Element error detected'
+      trapAdditionalInfoInteger1 - Site ID number, included if known
+      trapAdditionalInfoInteger2 - Group ID number, included if known
+      trapAdditionalInfoInteger3 - Network element ID number, included if known"
+     ::= { bncSysTraps 1 } 
+
+   trapBncSysError NOTIFICATION-TYPE
+     OBJECTS   { trapIdentifier,
+                 trapSequenceId,
+                 trapNetworkElemModelNumber,
+                 trapNetworkElemSerialNum,
+                 trapPerceivedSeverity,
+                 trapNetworkElemOperState,
+                 trapNetworkElemAlarmStatus,
+                 trapNetworkElemAdminState,
+                 trapNetworkElemAvailStatus,
+                 trapText,
+                 trapNETrapLastTrapTimeStamp,
+                 trapChangedObjectId,
+                 trapAdditionalInfoInteger1,
+                 trapAdditionalInfoInteger2,
+                 trapAdditionalInfoInteger3 }
+     STATUS      current
+     DESCRIPTION "This trap is issued for alarms related to BNC operation and
+      not for alarms related to devices external to the BNC platform.
+      trapText - 'BNC System error detected'
+      trapAdditionalInfoInteger1 - BNC ID number
+      trapAdditionalInfoInteger2 - not used, reserved
+      trapAdditionalInfoInteger3 - not used, reserved"
+     ::= { bncSysTraps 2 } 
+
+-- =============================================================================
+-- bncEnableTraps
+-- =============================================================================
+   bncEnableTraps OBJECT-TYPE
+     SYNTAX      INTEGER { enable(1), disable(2) }
+     MAX-ACCESS  read-only
+     STATUS      current
+     DESCRIPTION "Indicates whether or not the SNMP agent transmits traps to
+      the currently defined (configured) trap receivers."
+     ::=  { arrisMuxBNC 99 }
+
+-- =============================================================================
+-- the MIB-II system group
+-- Implementation of the System group is mandatory for all systems.  If an agent
+-- is not configured to have a value for any of these variables, a string of
+-- length 0 is returned.
+-- =============================================================================
+
+   sysDescr OBJECT-TYPE
+    SYNTAX      DisplayString (SIZE (0..255))
+    MAX-ACCESS      read-only
+    STATUS      current
+    DESCRIPTION "The unit shall return the full name and version of the unit
+     hardware along with the operating system name (e.g. CentOS) and its
+     release identifier."
+    ::= { system 1 }
+
+   sysObjectID OBJECT-TYPE
+    SYNTAX      OBJECT IDENTIFIER
+    MAX-ACCESS      read-only
+    STATUS      current
+    DESCRIPTION "The unit shall return an OID value of '1.3.6.1.4.1.1166.1.102'"
+    ::= { system 2 }
+
+   sysUpTime OBJECT-TYPE
+    SYNTAX      TimeTicks
+    MAX-ACCESS      read-only
+    STATUS      current
+    DESCRIPTION "The unit shall return the time (in hundredths of a second)
+     since the network management portion of the system was last
+     re-initialized."
+    ::= { system 3 }
+
+   sysContact OBJECT-TYPE
+    SYNTAX      DisplayString (SIZE (0..255))
+    MAX-ACCESS      read-write
+    STATUS      current
+    DESCRIPTION "The unit shall accept, preserve and return the contact text as
+     set by an external management system. The unit shall return a zero length
+     string until a value is set by an external management system."
+    ::= { system 4 }
+
+   sysName OBJECT-TYPE
+    SYNTAX      DisplayString (SIZE (0..255))
+    MAX-ACCESS      read-write
+    STATUS      current
+    DESCRIPTION "The unit shall accept, preserve and return the name text as
+     set by an external management system. The unit shall return a zero length
+     string until a value is set by an external management system. "
+    ::= { system 5 }
+
+   sysLocation OBJECT-TYPE
+    SYNTAX      DisplayString (SIZE (0..255))
+    MAX-ACCESS      read-write
+    STATUS      current
+    DESCRIPTION "The unit shall accept, preserve and return the location text
+     as set by an external management system. The unit shall return a zero
+     length string until a value is set by an external management system. "
+    ::= { system 6 }
+
+   sysServices OBJECT-TYPE
+    SYNTAX      INTEGER (0..127)
+    MAX-ACCESS      read-only
+    STATUS      current
+    DESCRIPTION "The unit shall return a value of 72 indicating the unit uses
+     OSI layers (physical)1, (datalink)2, (network)3, (transport)4 and
+     (application)7."
+    ::= { system 7 }
+
+--  MIB Tree
+--
+--  The following diagram listing the attributes in this MIB is for descriptive
+--  purposes only.
+--
+--  bcs ( OID = 1.3.6.1.4.1.1166.7 )
+--    +..bcsIdent
+--       +..identSerialNumber
+--       +..identChassisNumber
+--       +..identIfIndex
+--       +..identHardwareVersion
+--       +..identHardwareFeatures
+--       +..identInventoryCode
+--       +..identSoftwareVersion
+--       +..identLocationArea
+--       +..identLocationRack
+--       +..identLocationShelf
+--       +..identMIBVersion
+--       +..identAgentVersion
+--       +..identCommand
+--       +..identUnitModel         
+-- =============================================================================
+-- BCS-IDENT
+-- Only those objects relevant to the Mux BNC are defined.
+-- =============================================================================
+-- The Identification Group.
+
+-- This group of objects contains the identification of the software
+-- and hardware for a specific unit.
+
+   identSerialNumber OBJECT-TYPE
+     SYNTAX      DisplayString
+     MAX-ACCESS  read-only
+     STATUS      current
+     DESCRIPTION "The unit shall return its hardware serial number or a zero
+      length string if no serial number is available."
+     REFERENCE   " -- "
+     ::= { bcsIdent 1 }
+
+   identChassisNumber OBJECT-TYPE
+     SYNTAX      DisplayString
+     MAX-ACCESS  read-only
+     STATUS      current
+     DESCRIPTION "The unit shall return a zero length string."
+     REFERENCE   " -- "
+     ::= { bcsIdent 2 }
+
+   identIfIndex OBJECT-TYPE
+     SYNTAX      INTEGER (1..2147483647)
+     MAX-ACCESS  read-only
+     STATUS      current
+     DESCRIPTION "The unit shall return a value of 1."
+     REFERENCE   " -- " 
+     DEFVAL { 2147483647 }
+     ::= { bcsIdent 3 }
+
+   identHardwareVersion OBJECT-TYPE
+     SYNTAX      DisplayString
+     MAX-ACCESS  read-only
+     STATUS      current
+     DESCRIPTION "The unit shall return a zero length string."
+     REFERENCE   " -- "
+     ::= { bcsIdent 4 }
+
+   identHardwareFeatures OBJECT-TYPE
+     SYNTAX      DisplayString
+     MAX-ACCESS  read-only
+     STATUS      current
+     DESCRIPTION "The unit shall return a zero length string."
+     REFERENCE   " -- "
+     ::= { bcsIdent 5 }
+
+   identInventoryCode OBJECT-TYPE
+     SYNTAX      DisplayString
+     MAX-ACCESS  read-write
+     STATUS      current
+     DESCRIPTION "The unit shall accept, preserve and return the inventory code
+      text as set by an external management system. The unit shall return a
+      zero length string until a value is set by an external management system."
+     REFERENCE   " -- "
+     ::= { bcsIdent 6 }
+
+   identSoftwareVersion OBJECT-TYPE
+     SYNTAX      DisplayString
+     MAX-ACCESS  read-only
+     STATUS      current
+     DESCRIPTION "The unit shall return the application software version
+      identifier. The format of the identifier shall be an ordered three-tuple
+      consisting of release, sub-release and build numbers. A period (.) shall
+      be used to separate the three values."
+     REFERENCE   " -- "
+     ::= { bcsIdent 7 }
+
+   identLocationArea OBJECT-TYPE
+     SYNTAX      DisplayString
+     MAX-ACCESS  read-write
+     STATUS      current
+     DESCRIPTION "The unit shall accept, preserve and return the location area
+      text as set by an external management system. The unit shall return a
+      zero length string until a value is set by an external management system."
+     REFERENCE   " -- "
+     ::= { bcsIdent 8 }
+
+   identLocationRack OBJECT-TYPE
+     SYNTAX      DisplayString
+     MAX-ACCESS  read-write
+     STATUS      current
+     DESCRIPTION "The unit shall accept, preserve and return the location rack
+      text as set by an external management system. The unit shall return a
+      zero length string until a value is set by an external management system."
+     REFERENCE   " -- "
+     ::= { bcsIdent 9 }
+
+   identLocationShelf OBJECT-TYPE
+     SYNTAX      DisplayString
+     MAX-ACCESS  read-write
+     STATUS      current
+     DESCRIPTION "The unit shall accept, preserve and return the location shelf
+      text as set by an external management system. The unit shall return a
+      zero length string until a value is set by an external management system."
+     REFERENCE   " -- "
+     ::= { bcsIdent 10 }
+
+   identMIBVersion OBJECT-TYPE
+     SYNTAX      DisplayString
+     MAX-ACCESS  read-only
+     STATUS      current
+     DESCRIPTION "The unit shall return the version of the MIB being used by
+      the application software's SNMP agent functionality."
+     REFERENCE   " -- "
+     ::= { bcsIdent 11 }
+
+   identAgentVersion OBJECT-TYPE
+     SYNTAX      DisplayString
+     MAX-ACCESS  read-only
+     STATUS      current
+     DESCRIPTION "The unit shall return the version of the SNMP agent software
+      integrated into the application software. If the agent version is not
+      defined independently of the application software then the unit shall
+      return the value returned for identSoftwareVersion."
+     REFERENCE   " -- "
+     ::= { bcsIdent 12 }
+
+   identCommand OBJECT-TYPE
+     SYNTAX      INTEGER { restart(1), currentlyRestarting(2), unspecified(3),
+                           purgeAndRestart(4), currentlyPurgingAndRestarting(5),
+                           purgeNvramAndRestart(6),
+                           currentlyPurgingNvramAndRestarting(7) }
+     MAX-ACCESS  read-only
+     STATUS      current
+     DESCRIPTION " The unit shall return unspecified(3) as the value."
+     REFERENCE   " -- "
+     ::= { bcsIdent 13 }
+
+   identUnitModel OBJECT-TYPE
+     SYNTAX      DisplayString
+     MAX-ACCESS  read-only
+     STATUS      current
+     DESCRIPTION " The unit shall return the text 'Mux BNC' as the value. "
+     REFERENCE   " -- "
+     ::= { bcsIdent 15 }
+
+END
