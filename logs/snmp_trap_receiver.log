@@ -1,0 +1,11 @@
+2022-06-02 15:15:05 - SNMPTrapReceiver.py - <module> - 86 - INFO - -------- SNMP Trap Receiver Started --------
+2022-06-02 15:15:05 - SNMPTrapReceiver.py - <module> - 87 - INFO - Agent is listening SNMP Trap on 10.45.77.164 , Port : 162
+2022-06-02 15:15:05 - SNMPTrapReceiver.py - <module> - 89 - INFO - ---------------------------------------------------------------
+2022-06-02 15:15:13 - SNMPTrapReceiver.py - cbFun - 118 - INFO - -------- Received new Trap message from: 10.45.77.164 --------
+2022-06-02 15:15:13 - SNMPTrapReceiver.py - cbFun - 132 - INFO - SNMPv2-SMI::mib-2.1.3.0 = 0
+2022-06-02 15:15:13 - SNMPTrapReceiver.py - cbFun - 132 - INFO - SNMPv2-SMI::snmpModules.1.1.4.1.0 = 1.3.6.1.6.3.1.1.5.1
+2022-06-02 15:15:13 - SNMPTrapReceiver.py - cbFun - 132 - INFO - SNMPv2-SMI::snmpModules.18.1.3.0 = 192.168.100.4
+2022-06-02 15:15:13 - SNMPTrapReceiver.py - cbFun - 132 - INFO - SNMPv2-SMI::snmpModules.18.1.4.0 = public
+2022-06-02 15:15:13 - SNMPTrapReceiver.py - cbFun - 132 - INFO - SNMPv2-SMI::snmpModules.1.1.4.3.0 = 0.0
+2022-06-02 15:15:13 - SNMPTrapReceiver.py - cbFun - 138 - INFO - -------- End of Incoming Trap --------
+
