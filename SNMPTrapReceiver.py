@@ -1,62 +1,13 @@
 #!/usr/bin/python
-# python snmp trap receiver
 from pysnmp.entity import engine, config
 from pysnmp.carrier.asyncore.dgram import udp
 from pysnmp.entity.rfc3413 import ntfrcv
 from pysnmp.smi import builder, view, compiler, rfc1902
 import logging
-from logging.handlers import TimedRotatingFileHandler
-import sqlite3
-from sys import platform
 import sys
-import datetime
-import re
-
-# Get Database file by SO
-if platform == "win32":
-    traps_db = 'c:/bin/traps_database.db'
-else:
-    traps_db = '/var/log/jenkins/project_csv_files/obtain_encryption_mode_status/traps_database.db'
 
 
-def save_to_db_trap(traps={}):
-    '''Function to save the trap to the database'''
-    conn = sqlite3.connect(traps_db)
-    cursor = conn.cursor()
-
-    timestamp_string = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S%z")
-
-    for key, values in traps.items():
-        for oid in values:
-            params = (timestamp_string, key, oid[0], oid[1])
-
-            cursor.execute(
-                "INSERT INTO traps_catcher('date','ip','oid','value') VALUES(?,?,?,?)", params)
-        print(".")
-    conn.commit()
-    # LED Data Insertion Successful
-    conn.close()
-
-
-def init_logging(logger, level, log_file=None):
-    fmt = "%(asctime)s - %(pathname)s - %(funcName)s - %(lineno)d - %(levelname)s - %(message)s"
-    datefmt = "%Y-%m-%d %H:%M:%S"
-    formatter = logging.Formatter(fmt=fmt, datefmt=datefmt)
-
-    level = getattr(logging, level.upper())
-    logger.setLevel(level)
-    log_file = "logs/"+log_file
-    if log_file:
-        from logging.handlers import TimedRotatingFileHandler
-        handler = TimedRotatingFileHandler(
-            log_file, when="H", interval=1, backupCount=30)
-    else:
-        handler = logging.StreamHandler()
-
-    handler.setLevel(level)
-    handler.setFormatter(formatter)
-
-    logger.addHandler(handler)
+import utils
 
 
 # Assemble MIB browser
@@ -78,17 +29,13 @@ Port = 162
 
 
 # logger configuration
-
 logger = logging.getLogger('SNMP_Trap_Receiver')
-init_logging(logger, "INFO", log_file="snmp_trap_receiver.log")
+utils.init_logging(logger, "INFO", log_file="snmp_trap_receiver.log")
 
-
-logger.info("-------- SNMP Trap Receiver Started --------")
 logger.info("Agent is listening SNMP Trap on " +
             TrapAgentAddress+" , Port : " + str(Port))
 logger.info(
     '---------------------------------------------------------------')
-
 
 print("\nAgent is listening SNMP Trap on " +
       TrapAgentAddress+" , Port : " + str(Port)+"\n")
@@ -134,7 +81,7 @@ def cbFun(snmpEngine, stateReference, contextEngineId, contextName,
         list_traps.append((name.prettyPrint(), val.prettyPrint()))
         traps[ipDevice] = list_traps
 
-    save_to_db_trap(traps)
+    utils.save_to_db_trap(traps)
     logger.info("-------- End of Incoming Trap --------\n")
     print("-------- End of Incoming Trap --------\n")
 

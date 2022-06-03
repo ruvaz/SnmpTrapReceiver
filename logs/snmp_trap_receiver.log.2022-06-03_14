@@ -1,0 +1,356 @@
+2022-06-03 14:15:29 - SNMPTrapReceiver.py - cbFun - 65 - INFO - -------- Received new Trap message from: 10.11.70.145 --------
+2022-06-03 14:15:29 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::mib-2.1.3.0 = 778409886
+2022-06-03 14:15:29 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::snmpModules.1.1.4.1.0 = 1.3.6.1.4.1.1166.1.624.5.1
+2022-06-03 14:15:29 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.1.624.6.1.0 = 3
+2022-06-03 14:15:29 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.1.624.6.2.0 = -805826083
+2022-06-03 14:15:29 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.1.624.6.3.0 = 1
+2022-06-03 14:15:29 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.1.624.6.4.0 = 6
+2022-06-03 14:15:29 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.1.624.6.5.0 = 0
+2022-06-03 14:15:29 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.1.624.6.6.0 = 0
+2022-06-03 14:15:29 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.1.624.6.7.0 = Signal Alarm - Full Service Loss
+2022-06-03 14:15:29 - SNMPTrapReceiver.py - cbFun - 85 - INFO - -------- End of Incoming Trap --------
+
+2022-06-03 14:15:29 - SNMPTrapReceiver.py - cbFun - 65 - INFO - -------- Received new Trap message from: 10.11.70.145 --------
+2022-06-03 14:15:29 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::mib-2.1.3.0 = 778409886
+2022-06-03 14:15:29 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::snmpModules.1.1.4.1.0 = 1.3.6.1.4.1.1166.1.624.5.1
+2022-06-03 14:15:29 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.1.624.6.1.0 = 5
+2022-06-03 14:15:29 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.1.624.6.2.0 = -805826082
+2022-06-03 14:15:29 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.1.624.6.3.0 = 1
+2022-06-03 14:15:29 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.1.624.6.4.0 = 6
+2022-06-03 14:15:29 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.1.624.6.5.0 = 0
+2022-06-03 14:15:29 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.1.624.6.6.0 = 0
+2022-06-03 14:15:29 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.1.624.6.7.0 = Auth Alarm - Full Service Loss
+2022-06-03 14:15:29 - SNMPTrapReceiver.py - cbFun - 85 - INFO - -------- End of Incoming Trap --------
+
+2022-06-03 14:15:33 - SNMPTrapReceiver.py - cbFun - 65 - INFO - -------- Received new Trap message from: 10.11.70.146 --------
+2022-06-03 14:15:33 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::mib-2.1.3.0 = 778413361
+2022-06-03 14:15:33 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::snmpModules.1.1.4.1.0 = 1.3.6.1.4.1.1166.1.624.5.1
+2022-06-03 14:15:33 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.1.624.6.1.0 = 3
+2022-06-03 14:15:33 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.1.624.6.2.0 = -805790873
+2022-06-03 14:15:33 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.1.624.6.3.0 = 1
+2022-06-03 14:15:33 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.1.624.6.4.0 = 6
+2022-06-03 14:15:33 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.1.624.6.5.0 = 0
+2022-06-03 14:15:33 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.1.624.6.6.0 = 0
+2022-06-03 14:15:33 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.1.624.6.7.0 = Signal Alarm - Full Service Loss
+2022-06-03 14:15:33 - SNMPTrapReceiver.py - cbFun - 85 - INFO - -------- End of Incoming Trap --------
+
+2022-06-03 14:15:33 - SNMPTrapReceiver.py - cbFun - 65 - INFO - -------- Received new Trap message from: 10.11.70.146 --------
+2022-06-03 14:15:33 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::mib-2.1.3.0 = 778413361
+2022-06-03 14:15:33 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::snmpModules.1.1.4.1.0 = 1.3.6.1.4.1.1166.1.624.5.1
+2022-06-03 14:15:33 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.1.624.6.1.0 = 5
+2022-06-03 14:15:33 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.1.624.6.2.0 = -805790872
+2022-06-03 14:15:33 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.1.624.6.3.0 = 1
+2022-06-03 14:15:33 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.1.624.6.4.0 = 6
+2022-06-03 14:15:33 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.1.624.6.5.0 = 0
+2022-06-03 14:15:33 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.1.624.6.6.0 = 0
+2022-06-03 14:15:33 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.1.624.6.7.0 = Auth Alarm - Full Service Loss
+2022-06-03 14:15:33 - SNMPTrapReceiver.py - cbFun - 85 - INFO - -------- End of Incoming Trap --------
+
+2022-06-03 14:15:33 - SNMPTrapReceiver.py - cbFun - 65 - INFO - -------- Received new Trap message from: 10.11.70.144 --------
+2022-06-03 14:15:33 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::mib-2.1.3.0 = 778408985
+2022-06-03 14:15:33 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::snmpModules.1.1.4.1.0 = 1.3.6.1.4.1.1166.1.624.5.1
+2022-06-03 14:15:33 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.1.624.6.1.0 = 3
+2022-06-03 14:15:33 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.1.624.6.2.0 = -805834737
+2022-06-03 14:15:33 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.1.624.6.3.0 = 1
+2022-06-03 14:15:33 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.1.624.6.4.0 = 6
+2022-06-03 14:15:33 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.1.624.6.5.0 = 0
+2022-06-03 14:15:33 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.1.624.6.6.0 = 0
+2022-06-03 14:15:33 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.1.624.6.7.0 = Signal Alarm - Full Service Loss
+2022-06-03 14:15:33 - SNMPTrapReceiver.py - cbFun - 85 - INFO - -------- End of Incoming Trap --------
+
+2022-06-03 14:15:33 - SNMPTrapReceiver.py - cbFun - 65 - INFO - -------- Received new Trap message from: 10.11.70.144 --------
+2022-06-03 14:15:33 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::mib-2.1.3.0 = 778408985
+2022-06-03 14:15:33 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::snmpModules.1.1.4.1.0 = 1.3.6.1.4.1.1166.1.624.5.1
+2022-06-03 14:15:33 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.1.624.6.1.0 = 5
+2022-06-03 14:15:33 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.1.624.6.2.0 = -805834736
+2022-06-03 14:15:33 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.1.624.6.3.0 = 1
+2022-06-03 14:15:33 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.1.624.6.4.0 = 6
+2022-06-03 14:15:33 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.1.624.6.5.0 = 0
+2022-06-03 14:15:33 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.1.624.6.6.0 = 0
+2022-06-03 14:15:33 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.1.624.6.7.0 = Auth Alarm - Full Service Loss
+2022-06-03 14:15:33 - SNMPTrapReceiver.py - cbFun - 85 - INFO - -------- End of Incoming Trap --------
+
+2022-06-03 14:15:34 - SNMPTrapReceiver.py - cbFun - 65 - INFO - -------- Received new Trap message from: 10.11.70.143 --------
+2022-06-03 14:15:34 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::mib-2.1.3.0 = 638677730
+2022-06-03 14:15:34 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::snmpModules.1.1.4.1.0 = 1.3.6.1.4.1.1166.1.624.5.1
+2022-06-03 14:15:34 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.1.624.6.1.0 = 3
+2022-06-03 14:15:34 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.1.624.6.2.0 = 2091818996
+2022-06-03 14:15:34 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.1.624.6.3.0 = 1
+2022-06-03 14:15:34 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.1.624.6.4.0 = 6
+2022-06-03 14:15:34 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.1.624.6.5.0 = 0
+2022-06-03 14:15:34 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.1.624.6.6.0 = 0
+2022-06-03 14:15:34 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.1.624.6.7.0 = Signal Alarm - Full Service Loss
+2022-06-03 14:15:34 - SNMPTrapReceiver.py - cbFun - 85 - INFO - -------- End of Incoming Trap --------
+
+2022-06-03 14:15:34 - SNMPTrapReceiver.py - cbFun - 65 - INFO - -------- Received new Trap message from: 10.11.70.143 --------
+2022-06-03 14:15:34 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::mib-2.1.3.0 = 638677730
+2022-06-03 14:15:34 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::snmpModules.1.1.4.1.0 = 1.3.6.1.4.1.1166.1.624.5.1
+2022-06-03 14:15:34 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.1.624.6.1.0 = 5
+2022-06-03 14:15:34 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.1.624.6.2.0 = 2091818997
+2022-06-03 14:15:34 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.1.624.6.3.0 = 1
+2022-06-03 14:15:34 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.1.624.6.4.0 = 6
+2022-06-03 14:15:34 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.1.624.6.5.0 = 0
+2022-06-03 14:15:34 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.1.624.6.6.0 = 0
+2022-06-03 14:15:34 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.1.624.6.7.0 = Auth Alarm - Full Service Loss
+2022-06-03 14:15:34 - SNMPTrapReceiver.py - cbFun - 85 - INFO - -------- End of Incoming Trap --------
+
+2022-06-03 14:15:34 - SNMPTrapReceiver.py - cbFun - 65 - INFO - -------- Received new Trap message from: 10.11.36.170 --------
+2022-06-03 14:15:34 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::mib-2.1.3.0 = 778404837
+2022-06-03 14:15:34 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::snmpModules.1.1.4.1.0 = 1.3.6.1.4.1.1166.1.624.5.1
+2022-06-03 14:15:34 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.1.624.6.1.0 = 3
+2022-06-03 14:15:34 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.1.624.6.2.0 = -805877983
+2022-06-03 14:15:34 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.1.624.6.3.0 = 1
+2022-06-03 14:15:34 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.1.624.6.4.0 = 6
+2022-06-03 14:15:34 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.1.624.6.5.0 = 0
+2022-06-03 14:15:34 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.1.624.6.6.0 = 0
+2022-06-03 14:15:34 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.1.624.6.7.0 = Signal Alarm - Full Service Loss
+2022-06-03 14:15:34 - SNMPTrapReceiver.py - cbFun - 85 - INFO - -------- End of Incoming Trap --------
+
+2022-06-03 14:15:34 - SNMPTrapReceiver.py - cbFun - 65 - INFO - -------- Received new Trap message from: 10.11.36.170 --------
+2022-06-03 14:15:34 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::mib-2.1.3.0 = 778404837
+2022-06-03 14:15:34 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::snmpModules.1.1.4.1.0 = 1.3.6.1.4.1.1166.1.624.5.1
+2022-06-03 14:15:34 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.1.624.6.1.0 = 4
+2022-06-03 14:15:34 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.1.624.6.2.0 = -805877982
+2022-06-03 14:15:34 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.1.624.6.3.0 = 6
+2022-06-03 14:15:34 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.1.624.6.4.0 = 6
+2022-06-03 14:15:34 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.1.624.6.5.0 = 0
+2022-06-03 14:15:34 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.1.624.6.6.0 = 0
+2022-06-03 14:15:34 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.1.624.6.7.0 = Auth Alarm - Partial Service Loss
+2022-06-03 14:15:34 - SNMPTrapReceiver.py - cbFun - 85 - INFO - -------- End of Incoming Trap --------
+
+2022-06-03 14:15:39 - SNMPTrapReceiver.py - cbFun - 65 - INFO - -------- Received new Trap message from: 10.11.70.146 --------
+2022-06-03 14:15:39 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::mib-2.1.3.0 = 778413980
+2022-06-03 14:15:39 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::snmpModules.1.1.4.1.0 = 1.3.6.1.4.1.1166.1.624.5.1
+2022-06-03 14:15:39 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.1.624.6.1.0 = 1
+2022-06-03 14:15:39 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.1.624.6.2.0 = -805784686
+2022-06-03 14:15:39 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.1.624.6.3.0 = 1
+2022-06-03 14:15:39 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.1.624.6.4.0 = 1
+2022-06-03 14:15:39 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.1.624.6.5.0 = 0
+2022-06-03 14:15:39 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.1.624.6.6.0 = 0
+2022-06-03 14:15:39 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.1.624.6.7.0 = System Alarm
+2022-06-03 14:15:39 - SNMPTrapReceiver.py - cbFun - 85 - INFO - -------- End of Incoming Trap --------
+
+2022-06-03 14:15:39 - SNMPTrapReceiver.py - cbFun - 65 - INFO - -------- Received new Trap message from: 10.11.70.144 --------
+2022-06-03 14:15:39 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::mib-2.1.3.0 = 778409605
+2022-06-03 14:15:39 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::snmpModules.1.1.4.1.0 = 1.3.6.1.4.1.1166.1.624.5.1
+2022-06-03 14:15:39 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.1.624.6.1.0 = 1
+2022-06-03 14:15:39 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.1.624.6.2.0 = -805828546
+2022-06-03 14:15:39 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.1.624.6.3.0 = 1
+2022-06-03 14:15:39 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.1.624.6.4.0 = 1
+2022-06-03 14:15:39 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.1.624.6.5.0 = 0
+2022-06-03 14:15:39 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.1.624.6.6.0 = 0
+2022-06-03 14:15:39 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.1.624.6.7.0 = System Alarm
+2022-06-03 14:15:39 - SNMPTrapReceiver.py - cbFun - 85 - INFO - -------- End of Incoming Trap --------
+
+2022-06-03 14:15:40 - SNMPTrapReceiver.py - cbFun - 65 - INFO - -------- Received new Trap message from: 10.11.70.143 --------
+2022-06-03 14:15:40 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::mib-2.1.3.0 = 638678353
+2022-06-03 14:15:40 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::snmpModules.1.1.4.1.0 = 1.3.6.1.4.1.1166.1.624.5.1
+2022-06-03 14:15:40 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.1.624.6.1.0 = 1
+2022-06-03 14:15:40 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.1.624.6.2.0 = 2091825223
+2022-06-03 14:15:40 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.1.624.6.3.0 = 1
+2022-06-03 14:15:40 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.1.624.6.4.0 = 1
+2022-06-03 14:15:40 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.1.624.6.5.0 = 0
+2022-06-03 14:15:40 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.1.624.6.6.0 = 0
+2022-06-03 14:15:40 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.1.624.6.7.0 = System Alarm
+2022-06-03 14:15:40 - SNMPTrapReceiver.py - cbFun - 85 - INFO - -------- End of Incoming Trap --------
+
+2022-06-03 14:15:41 - SNMPTrapReceiver.py - cbFun - 65 - INFO - -------- Received new Trap message from: 10.11.70.145 --------
+2022-06-03 14:15:41 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::mib-2.1.3.0 = 778411126
+2022-06-03 14:15:42 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::snmpModules.1.1.4.1.0 = 1.3.6.1.4.1.1166.1.624.5.1
+2022-06-03 14:15:42 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.1.624.6.1.0 = 1
+2022-06-03 14:15:42 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.1.624.6.2.0 = -805813691
+2022-06-03 14:15:42 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.1.624.6.3.0 = 1
+2022-06-03 14:15:42 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.1.624.6.4.0 = 1
+2022-06-03 14:15:42 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.1.624.6.5.0 = 0
+2022-06-03 14:15:42 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.1.624.6.6.0 = 0
+2022-06-03 14:15:42 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.1.624.6.7.0 = System Alarm
+2022-06-03 14:15:42 - SNMPTrapReceiver.py - cbFun - 85 - INFO - -------- End of Incoming Trap --------
+
+2022-06-03 15:00:06 - SNMPTrapReceiver.py - cbFun - 65 - INFO - -------- Received new Trap message from: 10.11.99.104 --------
+2022-06-03 15:00:06 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::mib-2.1.3.0 = 30793745
+2022-06-03 15:00:06 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::snmpModules.1.1.4.1.0 = 1.3.6.1.4.1.1166.1.102.1.100.2
+2022-06-03 15:00:06 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.7.3.1.1.0 = 101
+2022-06-03 15:00:06 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.7.3.1.2.0 = 0
+2022-06-03 15:00:06 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.7.3.1.3.0 = BNC Server 4.2-102.20220408
+2022-06-03 15:00:06 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.7.3.1.4.0 = MAC-C0-A8-30-00-00-68
+2022-06-03 15:00:06 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.7.3.1.5.0 = 1
+2022-06-03 15:00:06 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.7.3.1.6.0 = 1
+2022-06-03 15:00:06 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.7.3.1.7.0 = 2
+2022-06-03 15:00:06 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.7.3.1.8.0 = 2
+2022-06-03 15:00:06 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.7.3.1.9.0 = 10
+2022-06-03 15:00:06 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.7.3.1.10.0 = 2022-06-03 20:00:06.882(UTC) INFO Database backup completed in 6 seconds
+2022-06-03 15:00:06 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.7.3.1.11.0 = 0
+2022-06-03 15:00:06 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.7.3.1.12.0 = BNC Server, IP= 10.11.99.104
+2022-06-03 15:00:06 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.7.3.1.13.0 = -1
+2022-06-03 15:00:06 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.7.3.1.14.0 = 101
+2022-06-03 15:00:06 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.7.3.1.15.0 = 0
+2022-06-03 15:00:06 - SNMPTrapReceiver.py - cbFun - 85 - INFO - -------- End of Incoming Trap --------
+
+2022-06-03 15:11:16 - SNMPTrapReceiver.py - cbFun - 65 - INFO - -------- Received new Trap message from: 10.11.70.143 --------
+2022-06-03 15:11:16 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::mib-2.1.3.0 = 639011981
+2022-06-03 15:11:16 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::snmpModules.1.1.4.1.0 = 1.3.6.1.4.1.1166.1.624.5.1
+2022-06-03 15:11:16 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.1.624.6.1.0 = 5
+2022-06-03 15:11:16 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.1.624.6.2.0 = 2095161492
+2022-06-03 15:11:16 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.1.624.6.3.0 = 6
+2022-06-03 15:11:16 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.1.624.6.4.0 = 1
+2022-06-03 15:11:16 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.1.624.6.5.0 = 0
+2022-06-03 15:11:16 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.1.624.6.6.0 = 0
+2022-06-03 15:11:16 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.1.624.6.7.0 = Auth Alarm - Full Service Loss
+2022-06-03 15:11:16 - SNMPTrapReceiver.py - cbFun - 85 - INFO - -------- End of Incoming Trap --------
+
+2022-06-03 15:11:16 - SNMPTrapReceiver.py - cbFun - 65 - INFO - -------- Received new Trap message from: 10.11.70.145 --------
+2022-06-03 15:11:16 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::mib-2.1.3.0 = 778744604
+2022-06-03 15:11:16 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::snmpModules.1.1.4.1.0 = 1.3.6.1.4.1.1166.1.624.5.1
+2022-06-03 15:11:16 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.1.624.6.1.0 = 5
+2022-06-03 15:11:16 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.1.624.6.2.0 = -802478908
+2022-06-03 15:11:16 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.1.624.6.3.0 = 6
+2022-06-03 15:11:16 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.1.624.6.4.0 = 1
+2022-06-03 15:11:16 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.1.624.6.5.0 = 0
+2022-06-03 15:11:16 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.1.624.6.6.0 = 0
+2022-06-03 15:11:16 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.1.624.6.7.0 = Auth Alarm - Full Service Loss
+2022-06-03 15:11:16 - SNMPTrapReceiver.py - cbFun - 85 - INFO - -------- End of Incoming Trap --------
+
+2022-06-03 15:11:17 - SNMPTrapReceiver.py - cbFun - 65 - INFO - -------- Received new Trap message from: 10.11.70.146 --------
+2022-06-03 15:11:17 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::mib-2.1.3.0 = 778747767
+2022-06-03 15:11:17 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::snmpModules.1.1.4.1.0 = 1.3.6.1.4.1.1166.1.624.5.1
+2022-06-03 15:11:17 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.1.624.6.1.0 = 5
+2022-06-03 15:11:17 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.1.624.6.2.0 = -802446820
+2022-06-03 15:11:17 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.1.624.6.3.0 = 6
+2022-06-03 15:11:17 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.1.624.6.4.0 = 1
+2022-06-03 15:11:17 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.1.624.6.5.0 = 0
+2022-06-03 15:11:17 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.1.624.6.6.0 = 0
+2022-06-03 15:11:17 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.1.624.6.7.0 = Auth Alarm - Full Service Loss
+2022-06-03 15:11:17 - SNMPTrapReceiver.py - cbFun - 85 - INFO - -------- End of Incoming Trap --------
+
+2022-06-03 15:11:22 - SNMPTrapReceiver.py - cbFun - 65 - INFO - -------- Received new Trap message from: 10.11.70.145 --------
+2022-06-03 15:11:22 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::mib-2.1.3.0 = 778745222
+2022-06-03 15:11:22 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::snmpModules.1.1.4.1.0 = 1.3.6.1.4.1.1166.1.624.5.1
+2022-06-03 15:11:22 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.1.624.6.1.0 = 1
+2022-06-03 15:11:22 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.1.624.6.2.0 = -802472729
+2022-06-03 15:11:22 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.1.624.6.3.0 = 6
+2022-06-03 15:11:22 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.1.624.6.4.0 = 6
+2022-06-03 15:11:22 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.1.624.6.5.0 = 0
+2022-06-03 15:11:22 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.1.624.6.6.0 = 0
+2022-06-03 15:11:22 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.1.624.6.7.0 = System Alarm
+2022-06-03 15:11:22 - SNMPTrapReceiver.py - cbFun - 85 - INFO - -------- End of Incoming Trap --------
+
+2022-06-03 15:11:22 - SNMPTrapReceiver.py - cbFun - 65 - INFO - -------- Received new Trap message from: 10.11.70.143 --------
+2022-06-03 15:11:22 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::mib-2.1.3.0 = 639012602
+2022-06-03 15:11:22 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::snmpModules.1.1.4.1.0 = 1.3.6.1.4.1.1166.1.624.5.1
+2022-06-03 15:11:22 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.1.624.6.1.0 = 1
+2022-06-03 15:11:22 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.1.624.6.2.0 = 2095167709
+2022-06-03 15:11:22 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.1.624.6.3.0 = 6
+2022-06-03 15:11:22 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.1.624.6.4.0 = 6
+2022-06-03 15:11:22 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.1.624.6.5.0 = 0
+2022-06-03 15:11:22 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.1.624.6.6.0 = 0
+2022-06-03 15:11:22 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.1.624.6.7.0 = System Alarm
+2022-06-03 15:11:22 - SNMPTrapReceiver.py - cbFun - 85 - INFO - -------- End of Incoming Trap --------
+
+2022-06-03 15:11:23 - SNMPTrapReceiver.py - cbFun - 65 - INFO - -------- Received new Trap message from: 10.11.70.146 --------
+2022-06-03 15:11:23 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::mib-2.1.3.0 = 778748385
+2022-06-03 15:11:23 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::snmpModules.1.1.4.1.0 = 1.3.6.1.4.1.1166.1.624.5.1
+2022-06-03 15:11:23 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.1.624.6.1.0 = 1
+2022-06-03 15:11:23 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.1.624.6.2.0 = -802440636
+2022-06-03 15:11:23 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.1.624.6.3.0 = 6
+2022-06-03 15:11:23 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.1.624.6.4.0 = 6
+2022-06-03 15:11:23 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.1.624.6.5.0 = 0
+2022-06-03 15:11:23 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.1.624.6.6.0 = 0
+2022-06-03 15:11:23 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.1.624.6.7.0 = System Alarm
+2022-06-03 15:11:23 - SNMPTrapReceiver.py - cbFun - 85 - INFO - -------- End of Incoming Trap --------
+
+2022-06-03 15:11:24 - SNMPTrapReceiver.py - cbFun - 65 - INFO - -------- Received new Trap message from: 10.11.70.144 --------
+2022-06-03 15:11:24 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::mib-2.1.3.0 = 778744114
+2022-06-03 15:11:24 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::snmpModules.1.1.4.1.0 = 1.3.6.1.4.1.1166.1.624.5.1
+2022-06-03 15:11:24 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.1.624.6.1.0 = 1
+2022-06-03 15:11:24 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.1.624.6.2.0 = -802483451
+2022-06-03 15:11:24 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.1.624.6.3.0 = 6
+2022-06-03 15:11:24 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.1.624.6.4.0 = 6
+2022-06-03 15:11:24 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.1.624.6.5.0 = 0
+2022-06-03 15:11:24 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.1.624.6.6.0 = 0
+2022-06-03 15:11:24 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.1.624.6.7.0 = System Alarm
+2022-06-03 15:11:24 - SNMPTrapReceiver.py - cbFun - 85 - INFO - -------- End of Incoming Trap --------
+
+2022-06-03 15:12:24 - SNMPTrapReceiver.py - cbFun - 65 - INFO - -------- Received new Trap message from: 10.11.70.145 --------
+2022-06-03 15:12:24 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::mib-2.1.3.0 = 778751408
+2022-06-03 15:12:24 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::snmpModules.1.1.4.1.0 = 1.3.6.1.4.1.1166.1.624.5.1
+2022-06-03 15:12:24 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.1.624.6.1.0 = 5
+2022-06-03 15:12:24 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.1.624.6.2.0 = -802410873
+2022-06-03 15:12:24 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.1.624.6.3.0 = 1
+2022-06-03 15:12:24 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.1.624.6.4.0 = 6
+2022-06-03 15:12:24 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.1.624.6.5.0 = 0
+2022-06-03 15:12:24 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.1.624.6.6.0 = 0
+2022-06-03 15:12:24 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.1.624.6.7.0 = Auth Alarm - Full Service Loss
+2022-06-03 15:12:24 - SNMPTrapReceiver.py - cbFun - 85 - INFO - -------- End of Incoming Trap --------
+
+2022-06-03 15:12:25 - SNMPTrapReceiver.py - cbFun - 65 - INFO - -------- Received new Trap message from: 10.11.70.143 --------
+2022-06-03 15:12:25 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::mib-2.1.3.0 = 639018818
+2022-06-03 15:12:25 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::snmpModules.1.1.4.1.0 = 1.3.6.1.4.1.1166.1.624.5.1
+2022-06-03 15:12:25 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.1.624.6.1.0 = 5
+2022-06-03 15:12:25 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.1.624.6.2.0 = 2095229873
+2022-06-03 15:12:25 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.1.624.6.3.0 = 1
+2022-06-03 15:12:25 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.1.624.6.4.0 = 6
+2022-06-03 15:12:25 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.1.624.6.5.0 = 0
+2022-06-03 15:12:25 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.1.624.6.6.0 = 0
+2022-06-03 15:12:25 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.1.624.6.7.0 = Auth Alarm - Full Service Loss
+2022-06-03 15:12:25 - SNMPTrapReceiver.py - cbFun - 85 - INFO - -------- End of Incoming Trap --------
+
+2022-06-03 15:12:25 - SNMPTrapReceiver.py - cbFun - 65 - INFO - -------- Received new Trap message from: 10.11.70.146 --------
+2022-06-03 15:12:25 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::mib-2.1.3.0 = 778754578
+2022-06-03 15:12:25 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::snmpModules.1.1.4.1.0 = 1.3.6.1.4.1.1166.1.624.5.1
+2022-06-03 15:12:25 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.1.624.6.1.0 = 5
+2022-06-03 15:12:25 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.1.624.6.2.0 = -802378716
+2022-06-03 15:12:25 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.1.624.6.3.0 = 1
+2022-06-03 15:12:25 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.1.624.6.4.0 = 6
+2022-06-03 15:12:25 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.1.624.6.5.0 = 0
+2022-06-03 15:12:25 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.1.624.6.6.0 = 0
+2022-06-03 15:12:25 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.1.624.6.7.0 = Auth Alarm - Full Service Loss
+2022-06-03 15:12:25 - SNMPTrapReceiver.py - cbFun - 85 - INFO - -------- End of Incoming Trap --------
+
+2022-06-03 15:12:28 - SNMPTrapReceiver.py - cbFun - 65 - INFO - -------- Received new Trap message from: 10.11.70.143 --------
+2022-06-03 15:12:28 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::mib-2.1.3.0 = 639019131
+2022-06-03 15:12:28 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::snmpModules.1.1.4.1.0 = 1.3.6.1.4.1.1166.1.624.5.1
+2022-06-03 15:12:28 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.1.624.6.1.0 = 1
+2022-06-03 15:12:28 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.1.624.6.2.0 = 2095232990
+2022-06-03 15:12:28 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.1.624.6.3.0 = 1
+2022-06-03 15:12:28 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.1.624.6.4.0 = 1
+2022-06-03 15:12:28 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.1.624.6.5.0 = 0
+2022-06-03 15:12:28 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.1.624.6.6.0 = 0
+2022-06-03 15:12:28 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.1.624.6.7.0 = System Alarm
+2022-06-03 15:12:28 - SNMPTrapReceiver.py - cbFun - 85 - INFO - -------- End of Incoming Trap --------
+
+2022-06-03 15:12:29 - SNMPTrapReceiver.py - cbFun - 65 - INFO - -------- Received new Trap message from: 10.11.70.144 --------
+2022-06-03 15:12:29 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::mib-2.1.3.0 = 778750612
+2022-06-03 15:12:29 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::snmpModules.1.1.4.1.0 = 1.3.6.1.4.1.1166.1.624.5.1
+2022-06-03 15:12:29 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.1.624.6.1.0 = 1
+2022-06-03 15:12:29 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.1.624.6.2.0 = -802418471
+2022-06-03 15:12:29 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.1.624.6.3.0 = 1
+2022-06-03 15:12:29 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.1.624.6.4.0 = 1
+2022-06-03 15:12:29 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.1.624.6.5.0 = 0
+2022-06-03 15:12:29 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.1.624.6.6.0 = 0
+2022-06-03 15:12:29 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.1.624.6.7.0 = System Alarm
+2022-06-03 15:12:29 - SNMPTrapReceiver.py - cbFun - 85 - INFO - -------- End of Incoming Trap --------
+
+2022-06-03 15:12:30 - SNMPTrapReceiver.py - cbFun - 65 - INFO - -------- Received new Trap message from: 10.11.70.145 --------
+2022-06-03 15:12:30 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::mib-2.1.3.0 = 778752027
+2022-06-03 15:12:30 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::snmpModules.1.1.4.1.0 = 1.3.6.1.4.1.1166.1.624.5.1
+2022-06-03 15:12:30 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.1.624.6.1.0 = 1
+2022-06-03 15:12:30 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.1.624.6.2.0 = -802404685
+2022-06-03 15:12:30 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.1.624.6.3.0 = 1
+2022-06-03 15:12:30 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.1.624.6.4.0 = 1
+2022-06-03 15:12:30 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.1.624.6.5.0 = 0
+2022-06-03 15:12:30 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.1.624.6.6.0 = 0
+2022-06-03 15:12:30 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.1.624.6.7.0 = System Alarm
+2022-06-03 15:12:31 - SNMPTrapReceiver.py - cbFun - 85 - INFO - -------- End of Incoming Trap --------
+
+2022-06-03 15:12:31 - SNMPTrapReceiver.py - cbFun - 65 - INFO - -------- Received new Trap message from: 10.11.70.146 --------
+2022-06-03 15:12:31 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::mib-2.1.3.0 = 778755195
+2022-06-03 15:12:31 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::snmpModules.1.1.4.1.0 = 1.3.6.1.4.1.1166.1.624.5.1
+2022-06-03 15:12:31 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.1.624.6.1.0 = 1
+2022-06-03 15:12:31 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.1.624.6.2.0 = -802372533
+2022-06-03 15:12:31 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.1.624.6.3.0 = 1
+2022-06-03 15:12:31 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.1.624.6.4.0 = 1
+2022-06-03 15:12:31 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.1.624.6.5.0 = 0
+2022-06-03 15:12:31 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.1.624.6.6.0 = 0
+2022-06-03 15:12:31 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.1.624.6.7.0 = System Alarm
+2022-06-03 15:12:31 - SNMPTrapReceiver.py - cbFun - 85 - INFO - -------- End of Incoming Trap --------
+
