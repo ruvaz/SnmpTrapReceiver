@@ -3,6 +3,10 @@ import logging
 from sys import platform
 import sqlite3
 import datetime
+import smtplib
+from email.mime.text import MIMEText
+
+# pip install secure-smtplib
 
 # Get Database file by SO
 if platform == "win32":
@@ -38,7 +42,7 @@ def init_logging(logger, level, log_file=None):
 
     level = getattr(logging, level.upper())
     logger.setLevel(level)
-    log_file = "logs/"+log_file
+    log_file = "logs/" + log_file
     if log_file:
         from logging.handlers import TimedRotatingFileHandler
         handler = TimedRotatingFileHandler(
@@ -50,3 +54,24 @@ def init_logging(logger, level, log_file=None):
     handler.setFormatter(formatter)
 
     logger.addHandler(handler)
+
+
+def send_email_traps(ip, traps):
+    message = "Receive new Trap message from: %s \n\n" % ip
+    for row in traps:
+        message = message + "%s - %s\n" % (row[0], row[1])
+
+    sender = 'jenkins_snmp_traps@commscope.com'
+    receivers = ["ruben.vazquez@commscope.com", "marlon.lising@commscope.com"]
+    msg = MIMEText(message)
+    msg['Subject'] = 'Trap receiver for IP: ' + ip
+    msg['From'] = sender
+    msg['X-Mailer'] = 'Python/' + str(platform)
+
+    try:
+        smtpObj = smtplib.SMTP('smtp.arrisi.com', 25)
+        smtpObj.debuglevel = 0
+        smtpObj.sendmail(sender, receivers, msg.as_string())
+        print("Successfully sent email")
+    except smtplib.SMTPException:
+        print("Error: unable to send email")

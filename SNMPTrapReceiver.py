@@ -6,9 +6,9 @@ from pysnmp.smi import builder, view, compiler, rfc1902
 import logging
 import sys
 
-
 import utils
 
+ip_to_report = ['10.11.102.16', '10.11.99.104']
 
 # Assemble MIB browser
 mibBuilder = builder.MibBuilder()
@@ -27,18 +27,17 @@ snmpEngine = engine.SnmpEngine()
 TrapAgentAddress = sys.argv[1]  # '10.45.77.164'
 Port = 162
 
-
 # logger configuration
 logger = logging.getLogger('SNMP_Trap_Receiver')
 utils.init_logging(logger, "INFO", log_file="snmp_trap_receiver.log")
 
 logger.info("Agent is listening SNMP Trap on " +
-            TrapAgentAddress+" , Port : " + str(Port))
+            TrapAgentAddress + " , Port : " + str(Port))
 logger.info(
     '---------------------------------------------------------------')
 
 print("\nAgent is listening SNMP Trap on " +
-      TrapAgentAddress+" , Port : " + str(Port)+"\n")
+      TrapAgentAddress + " , Port : " + str(Port) + "\n")
 
 config.addTransport(
     snmpEngine,
@@ -61,9 +60,9 @@ def cbFun(snmpEngine, stateReference, contextEngineId, contextName,
     )
     ipDevice, port = execContext['transportAddress']
 
-    print("-------- Received new Trap message from: % s  --------" % ipDevice)
+    print("-------- Receive new Trap message from: %s  --------" % ipDevice)
     logger.info(
-        "-------- Received new Trap message from: %s --------" % ipDevice)
+        "-------- Receive new Trap message from: %s --------" % ipDevice)
 
     # Get the trap OID with Mib
     varBinds = [
@@ -82,6 +81,9 @@ def cbFun(snmpEngine, stateReference, contextEngineId, contextName,
         traps[ipDevice] = list_traps
 
     utils.save_to_db_trap(traps)
+    if ipDevice in ip_to_report:
+        utils.send_email_traps(ipDevice, traps[ipDevice])
+
     logger.info("-------- End of Incoming Trap --------\n")
     print("-------- End of Incoming Trap --------\n")
 

@@ -1,0 +1,22 @@
+2022-06-03 17:00:07 - SNMPTrapReceiver.py - cbFun - 65 - INFO - -------- Received new Trap message from: 10.11.99.104 --------
+2022-06-03 17:00:07 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::mib-2.1.3.0 = 31513834
+2022-06-03 17:00:07 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::snmpModules.1.1.4.1.0 = 1.3.6.1.4.1.1166.1.102.1.100.2
+2022-06-03 17:00:07 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.7.3.1.1.0 = 101
+2022-06-03 17:00:07 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.7.3.1.2.0 = 0
+2022-06-03 17:00:07 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.7.3.1.3.0 = BNC Server 4.2-102.20220408
+2022-06-03 17:00:07 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.7.3.1.4.0 = MAC-C0-A8-30-00-00-68
+2022-06-03 17:00:07 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.7.3.1.5.0 = 1
+2022-06-03 17:00:07 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.7.3.1.6.0 = 1
+2022-06-03 17:00:07 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.7.3.1.7.0 = 2
+2022-06-03 17:00:07 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.7.3.1.8.0 = 2
+2022-06-03 17:00:07 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.7.3.1.9.0 = 10
+2022-06-03 17:00:07 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.7.3.1.10.0 = 2022-06-03 22:00:07.778(UTC) INFO Database backup completed in 7 seconds
+2022-06-03 17:00:07 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.7.3.1.11.0 = 0
+2022-06-03 17:00:07 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.7.3.1.12.0 = BNC Server, IP= 10.11.99.104
+2022-06-03 17:00:07 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.7.3.1.13.0 = -1
+2022-06-03 17:00:07 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.7.3.1.14.0 = 101
+2022-06-03 17:00:07 - SNMPTrapReceiver.py - cbFun - 79 - INFO - SNMPv2-SMI::enterprises.1166.7.3.1.15.0 = 0
+2022-06-03 17:00:07 - SNMPTrapReceiver.py - cbFun - 85 - INFO - -------- End of Incoming Trap --------
+
+2022-06-03 17:16:19 - SNMPTrapReceiver.py - <module> - 35 - INFO - Agent is listening SNMP Trap on 10.45.77.164 , Port : 162
+2022-06-03 17:16:19 - SNMPTrapReceiver.py - <module> - 37 - INFO - ---------------------------------------------------------------
